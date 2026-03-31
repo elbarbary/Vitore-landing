@@ -25,6 +25,7 @@
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
       overflow-x: hidden;
+      transition: background-color 0.7s ease, color 0.7s ease;
     }
 
     :root {
@@ -54,23 +55,39 @@
       to { transform: translate(-50%, 0) rotate(360deg); }
     }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-20px); }
+    @keyframes float-slow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-30px); }
     }
 
-    @keyframes float-3d {
+    @keyframes float-emoji {
       0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.4; }
-      50% { transform: translateY(-20px) rotate(5deg); opacity: 0.7; }
+      50% { transform: translateY(-25px) rotate(5deg); opacity: 0.7; }
     }
 
     @keyframes pulse-slow {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 0.6; }
+      0%, 100% { opacity: 0.25; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.05); }
     }
 
     @keyframes ping {
       75%, 100% { transform: scale(2); opacity: 0; }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes glow-pulse {
+      0%, 100% { box-shadow: 0 0 30px rgba(16, 185, 129, 0.3); }
+      50% { box-shadow: 0 0 50px rgba(16, 185, 129, 0.5); }
     }
 
     /* Background */
@@ -82,31 +99,94 @@
       z-index: 0;
     }
 
-    .aurora {
+    .aurora-gradient {
       position: absolute;
-      width: 800px;
-      height: 800px;
+      width: 1400px;
+      height: 1400px;
       border-radius: 50%;
-      filter: blur(120px);
+      filter: blur(150px);
       top: -40%;
       left: 50%;
       transform: translate(-50%, 0);
       animation: aurora-spin 40s linear infinite;
       opacity: 0.25;
+      background: conic-gradient(from 0deg at 50% 50%, #10b981 0deg, #06b6d4 60deg, #8b5cf6 120deg, #ec4899 180deg, #f59e0b 240deg, #10b981 300deg, #10b981 360deg);
     }
 
-    body.dark .aurora {
+    body.dark .aurora-gradient {
       opacity: 0.2;
     }
 
-    .aurora.desktop-only {
-      display: none;
+    body.light .aurora-gradient {
+      opacity: 0.3;
+    }
+
+    /* Desktop-only secondary gradient */
+    .aurora-secondary {
+      position: absolute;
+      width: 900px;
+      height: 900px;
+      border-radius: 50%;
+      filter: blur(120px);
+      bottom: -30%;
+      right: -15%;
+      background: radial-gradient(circle, #10b981 0%, #06b6d4 50%, transparent 70%);
+      animation: float-slow 20s ease-in-out infinite;
+      opacity: 0.2;
+    }
+
+    @media (max-width: 767px) {
+      .aurora-secondary {
+        display: none;
+      }
+    }
+
+    /* Interactive mesh gradient */
+    .mesh-gradient {
+      position: absolute;
+      inset: 0;
+      opacity: 0.4;
+      transition: background-image 0.3s ease;
+      pointer-events: none;
+    }
+
+    body.dark .mesh-gradient {
+      opacity: 0.3;
+    }
+
+    body.light .mesh-gradient {
+      opacity: 0.4;
+    }
+
+    /* Floating emojis container */
+    .floating-emojis {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .floating-emoji {
+      position: absolute;
+      font-size: 3rem;
+      drop-shadow(0 4px 12px rgba(0,0,0,0.1));
+      opacity: 0.5;
+      animation: float-emoji var(--duration, 6s) ease-in-out infinite;
+      animation-delay: var(--delay, 0s);
     }
 
     @media (min-width: 768px) {
-      .aurora.desktop-only {
-        display: block;
+      .floating-emoji {
+        opacity: 0.6;
       }
+    }
+
+    body.dark .floating-emoji {
+      opacity: 0.4;
+    }
+
+    body.dark .floating-emoji {
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
     }
 
     /* Header */
@@ -116,35 +196,55 @@
       left: 0;
       right: 0;
       z-index: 50;
+      padding: 0.5rem;
+      margin-bottom: 0;
+    }
+
+    @media (min-width: 640px) {
+      header {
+        padding: 1rem;
+      }
     }
 
     .header-container {
-      margin: 0.5rem;
       max-width: 1280px;
-      margin-left: auto;
-      margin-right: auto;
+      margin: 0 auto;
     }
 
     .header-bar {
       backdrop-filter: blur(32px);
-      border: 1px solid rgba(255,255,255,0.6);
+      border: 1px solid;
       border-radius: 1rem;
-      padding: 0.75rem 1.5rem;
+      padding: 0.75rem 1rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
       transition: all 0.7s ease;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 20px;
+    }
+
+    @media (min-width: 640px) {
+      .header-bar {
+        padding: 0.75rem 1.5rem;
+      }
     }
 
     body.dark .header-bar {
       background: rgba(0,0,0,0.6);
       border-color: rgba(255,255,255,0.1);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
     }
 
     body.light .header-bar {
       background: rgba(255,255,255,0.8);
       border-color: rgba(255,255,255,0.6);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
     }
 
     .logo {
@@ -152,18 +252,26 @@
       align-items: center;
       gap: 0.75rem;
       text-decoration: none;
+      color: inherit;
+      font-weight: 700;
+      transition: transform 0.3s;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
     }
 
     .logo-image {
       width: 40px;
       height: 40px;
       border-radius: 0.5rem;
-      background: var(--primary);
+      background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 24px;
       color: white;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
     }
 
     .beta-badge {
@@ -175,7 +283,7 @@
       font-size: 0.75rem;
       font-weight: 700;
       border: 1px solid;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 8px;
       letter-spacing: 0.05em;
     }
 
@@ -189,35 +297,55 @@
       background: rgba(16, 185, 129, 0.1);
       color: #059669;
       border-color: rgba(16, 185, 129, 0.3);
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.1);
     }
 
     body.dark .beta-badge {
       background: rgba(16, 185, 129, 0.2);
       color: #6ee7b7;
       border-color: rgba(16, 185, 129, 0.3);
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.15);
     }
 
     .ping {
+      position: relative;
       display: inline-flex;
       height: 8px;
       width: 8px;
       border-radius: 50%;
-      animation: ping 2s infinite;
     }
 
     .ping::before {
       content: '';
       position: absolute;
-      width: 8px;
-      height: 8px;
+      width: 100%;
+      height: 100%;
       border-radius: 50%;
-      background: var(--primary);
+      background: #10b981;
+      animation: ping 2s infinite;
+    }
+
+    .ping::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: #10b981;
+      top: 0;
+      left: 0;
     }
 
     nav {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.5rem;
+    }
+
+    @media (min-width: 640px) {
+      nav {
+        gap: 1rem;
+      }
     }
 
     .theme-toggle {
@@ -230,16 +358,14 @@
       display: flex;
       align-items: center;
       padding: 4px;
+      position: relative;
+      background: #3f3f46;
+      box-shadow: inset 0 2px 8px rgba(0,0,0,0.3);
     }
 
     body.light .theme-toggle {
       background: linear-gradient(to right, #fcd34d, #fed7aa);
       box-shadow: 0 4px 15px rgba(245, 158, 11, 0.2);
-    }
-
-    body.dark .theme-toggle {
-      background: #3f3f46;
-      box-shadow: inset 0 2px 8px rgba(0,0,0,0.3);
     }
 
     .toggle-circle {
@@ -251,18 +377,15 @@
       justify-content: center;
       transition: all 0.5s ease;
       font-size: 14px;
+      background: #1f2937;
+      box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+      transform: translateX(32px);
     }
 
     body.light .toggle-circle {
       background: white;
       box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
       transform: translateX(0);
-    }
-
-    body.dark .toggle-circle {
-      background: #1f2937;
-      box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
-      transform: translateX(32px);
     }
 
     .nav-link {
@@ -299,54 +422,59 @@
       background: rgba(255, 255, 255, 0.1);
     }
 
-    .cta-button {
-      position: relative;
-      padding: 0.625rem 1.25rem;
-      font-size: 0.875rem;
-      font-weight: 700;
-      border-radius: 0.5rem;
-      overflow: hidden;
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .cta-button.dark {
-      background: #111;
-      color: white;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-    }
-
-    .cta-button.dark:hover {
-      background: #1f2937;
-      box-shadow: 0 12px 20px rgba(0,0,0,0.15);
-      transform: translateY(-2px);
-    }
-
-    .cta-button.primary {
-      background: linear-gradient(to right, var(--primary), var(--secondary));
-      color: white;
-      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.25);
-    }
-
-    .cta-button.primary:hover {
-      box-shadow: 0 12px 25px rgba(16, 185, 129, 0.3);
-      transform: translateY(-2px);
-    }
-
     /* Hero Section */
     .hero {
       position: relative;
       min-height: 100vh;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 8rem 1.5rem 5rem;
       overflow: hidden;
       z-index: 10;
+    }
+
+    @media (min-width: 640px) {
+      .hero {
+        padding: 8rem 2rem 5rem;
+      }
+    }
+
+    .hero-decorations {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .hero-gradient-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      animation: pulse-slow 6s ease-in-out infinite;
+    }
+
+    .orb-1 {
+      width: 384px;
+      height: 384px;
+      top: 80px;
+      left: 25%;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(6, 182, 212, 0.2));
+    }
+
+    .orb-2 {
+      width: 320px;
+      height: 320px;
+      bottom: 80px;
+      right: 25%;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(236, 72, 153, 0.15));
+      animation-delay: 1s;
+    }
+
+    @media (max-width: 767px) {
+      .hero-gradient-orb {
+        display: none;
+      }
     }
 
     .hero-content {
@@ -372,14 +500,12 @@
       margin-right: auto;
       font-size: 0.875rem;
       font-weight: 600;
-      opacity: 0;
-      transform: translateY(16px);
-      animation: fadeInUp 0.6s ease 0.2s forwards;
+      animation: fadeInUp 0.6s ease 0.2s both;
     }
 
     body.light .hero-badge {
-      background: rgba(16, 185, 129, 0.05);
-      border-color: rgba(16, 185, 129, 0.5);
+      background: rgba(16, 185, 129, 0.08);
+      border-color: rgba(16, 185, 129, 0.3);
       color: #059669;
     }
 
@@ -390,13 +516,12 @@
     }
 
     h1 {
-      font-size: clamp(2rem, 8vw, 4rem);
+      font-size: clamp(2.5rem, 8vw, 4rem);
       font-weight: 900;
       line-height: 0.9;
       letter-spacing: -0.02em;
       margin-bottom: 2rem;
-      opacity: 0;
-      animation: fadeInUp 0.6s ease 0.3s forwards;
+      animation: fadeInUp 0.6s ease 0.3s both;
     }
 
     body.dark h1 {
@@ -421,8 +546,7 @@
       line-height: 1.5;
       max-width: 48rem;
       margin: 2.5rem auto;
-      opacity: 0;
-      animation: fadeInUp 0.6s ease 0.4s forwards;
+      animation: fadeInUp 0.6s ease 0.4s both;
     }
 
     body.dark .subheading {
@@ -433,13 +557,25 @@
       color: #4b5563;
     }
 
+    .underline-text {
+      position: relative;
+      font-weight: 600;
+    }
+
+    body.dark .underline-text {
+      color: white;
+    }
+
+    body.light .underline-text {
+      color: #111;
+    }
+
     .cta-group {
       display: flex;
       flex-direction: column;
       gap: 1rem;
       margin-bottom: 2rem;
-      opacity: 0;
-      animation: fadeInUp 0.6s ease 0.5s forwards;
+      animation: fadeInUp 0.6s ease 0.5s both;
     }
 
     @media (min-width: 640px) {
@@ -461,13 +597,8 @@
       border: none;
       cursor: pointer;
       transition: all 0.3s;
-      flex: 1;
-    }
-
-    @media (min-width: 640px) {
-      .cta-button {
-        flex: 0 1 auto;
-      }
+      flex: 0 1 auto;
+      font-size: 1rem;
     }
 
     .app-store-btn {
@@ -496,8 +627,7 @@
     .hero-note {
       font-size: 0.875rem;
       margin-bottom: 3rem;
-      opacity: 0;
-      animation: fadeInUp 0.6s ease 0.6s forwards;
+      animation: fadeInUp 0.6s ease 0.6s both;
     }
 
     body.dark .hero-note {
@@ -508,38 +638,59 @@
       color: #6b7280;
     }
 
+    /* Stats Grid */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 1.5rem;
-      max-width: 56rem;
+      max-width: 64rem;
       margin: 0 auto;
-      opacity: 0;
-      animation: fadeInUp 0.6s ease 0.7s forwards;
+      animation: fadeInUp 0.6s ease 0.7s both;
     }
 
     .stat-card {
+      position: relative;
       padding: 1.5rem;
-      border-radius: 1.5rem;
+      border-radius: 1rem;
       border: 1px solid;
       text-align: center;
       transition: all 0.3s;
-      position: relative;
+      backdrop-filter: blur(20px);
       overflow: hidden;
     }
 
-    body.light .stat-card {
-      background: rgba(255,255,255,0.9);
-      border-color: rgba(255,255,255,0.8);
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(to right, #10b981, #06b6d4);
     }
 
     body.dark .stat-card {
       background: rgba(255,255,255,0.05);
       border-color: rgba(255,255,255,0.1);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    }
+
+    body.light .stat-card {
+      background: rgba(255,255,255,0.9);
+      border-color: rgba(255,255,255,0.8);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.05);
     }
 
     .stat-card:hover {
       transform: translateY(-4px);
+    }
+
+    body.dark .stat-card:hover {
+      box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+    }
+
+    body.light .stat-card:hover {
+      box-shadow: 0 12px 24px rgba(0,0,0,0.1);
     }
 
     .stat-icon {
@@ -547,24 +698,24 @@
       margin-bottom: 0.5rem;
     }
 
-    .stat-number {
+    .stat-value {
       font-size: 2rem;
       font-weight: 900;
-      margin: 0.5rem 0;
+      margin-bottom: 0.5rem;
       font-variant-numeric: tabular-nums;
     }
 
-    body.dark .stat-number {
+    body.dark .stat-value {
       color: white;
     }
 
-    body.light .stat-number {
+    body.light .stat-value {
       color: #111;
     }
 
     .stat-label {
       font-size: 0.75rem;
-      font-weight: 700;
+      font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
@@ -577,41 +728,105 @@
       color: #6b7280;
     }
 
+    /* 3D Tilt Card Effect */
+    .tilt-card {
+      perspective: 1000px;
+      position: relative;
+      transition: transform 0.3s ease-out;
+      transform-style: preserve-3d;
+    }
+
+    .tilt-card-inner {
+      position: relative;
+      border-radius: 2rem;
+      border: 1px solid;
+      padding: 2rem;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(20px);
+    }
+
+    body.dark .tilt-card-inner {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.1);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+    }
+
+    body.light .tilt-card-inner {
+      background: rgba(255,255,255,0.9);
+      border-color: rgba(255,255,255,0.8);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+    }
+
+    .tilt-card:hover .tilt-card-inner {
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+
+    .tilt-card-glare {
+      position: absolute;
+      inset: 0;
+      border-radius: 2rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .tilt-card:hover .tilt-card-glare {
+      opacity: 0.15;
+      background: radial-gradient(circle at var(--glare-x, 50%) var(--glare-y, 50%), white, transparent 50%);
+    }
+
     /* Problem Section */
-    .problem {
-      padding: 8rem 1.5rem;
+    .problem-section {
+      padding: 2rem 1.5rem;
       position: relative;
       z-index: 10;
     }
 
+    @media (min-width: 640px) {
+      .problem-section {
+        padding: 4rem 2rem;
+      }
+    }
+
+    .section-container {
+      max-width: 80rem;
+      margin: 0 auto;
+    }
+
     .section-header {
-      display: flex;
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-label {
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
       gap: 0.75rem;
-      color: #ef4444;
-      font-weight: 700;
       font-size: 0.875rem;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.125em;
+      letter-spacing: 0.2em;
       margin-bottom: 1.5rem;
+      color: #dc2626;
     }
 
-    .divider {
-      width: 48px;
+    .section-label::before,
+    .section-label::after {
+      content: '';
+      width: 3rem;
       height: 1px;
-      background: linear-gradient(to right, transparent, #fca5a5);
+      background: linear-gradient(to right, transparent, #dc2626);
     }
 
-    .divider.right {
-      background: linear-gradient(to left, transparent, #fca5a5);
+    .section-label::after {
+      background: linear-gradient(to left, transparent, #dc2626);
     }
 
     h2 {
       font-size: clamp(2rem, 6vw, 3.5rem);
       font-weight: 900;
-      text-align: center;
-      margin-bottom: 3rem;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
     }
 
     body.dark h2 {
@@ -622,75 +837,491 @@
       color: #111;
     }
 
-    .red-text {
-      color: #ef4444;
+    .highlight {
+      color: #dc2626;
     }
 
-    .problem-grid {
+    /* Bento Grid */
+    .bento-grid {
       display: grid;
-      gap: 1.25rem;
-      max-width: 80rem;
-      margin: 0 auto;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 3rem;
+    }
+
+    @media (min-width: 768px) {
+      .bento-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+      }
+
+      .bento-grid .tilt-card:first-child {
+        grid-column: span 2;
+      }
     }
 
     .problem-card {
-      border-radius: 2rem;
-      padding: 2.5rem;
-      border: 1px solid;
-      transition: all 0.5s;
-      position: relative;
-      overflow: hidden;
+      min-height: 250px;
+      display: flex;
+      flex-direction: column;
     }
 
-    body.light .problem-card {
-      background: rgba(255,255,255,0.9);
-      border-color: rgba(255,255,255,0.8);
-    }
-
-    body.dark .problem-card {
-      background: rgba(255,255,255,0.05);
-      border-color: rgba(255,255,255,0.1);
-    }
-
-    .problem-card:hover {
-      transform: translateY(-4px);
-    }
-
-    .problem-card h3 {
-      font-size: 1.875rem;
-      margin-bottom: 1rem;
-      font-weight: 900;
-    }
-
-    body.dark .problem-card h3 {
+    .problem-card.large {
+      background: linear-gradient(135deg, #dc2626 0%, #ea580c 100%);
       color: white;
     }
 
-    body.light .problem-card h3 {
+    .problem-card.large .tilt-card-inner {
+      background: none;
+      border: none;
+      box-shadow: none;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .problem-card.large .tilt-card-inner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0.2;
+      background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0);
+      background-size: 24px 24px;
+      border-radius: 2rem;
+    }
+
+    .large-number {
+      font-size: 3.5rem;
+      font-weight: 900;
+      margin-bottom: 0.5rem;
+    }
+
+    .large-text {
+      font-size: 1.125rem;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    /* Features Section */
+    .features-section {
+      padding: 2rem 1.5rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    @media (min-width: 640px) {
+      .features-section {
+        padding: 4rem 2rem;
+      }
+    }
+
+    .features-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    body.dark .features-bg {
+      background: linear-gradient(to bottom, transparent, rgba(16, 185, 129, 0.05), transparent);
+    }
+
+    body.light .features-bg {
+      background: linear-gradient(to bottom, transparent, rgba(16, 185, 129, 0.08), transparent);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    @media (min-width: 1024px) {
+      .features-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .feature-card {
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .feature-icon-wrapper {
+      width: 80px;
+      height: 80px;
+      border-radius: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 8px 16px;
+    }
+
+    .feature-icon-emerald {
+      background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+      box-shadow: 0 8px 16px rgba(16, 185, 129, 0.25);
+    }
+
+    .feature-icon-amber {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      box-shadow: 0 8px 16px rgba(245, 158, 11, 0.25);
+    }
+
+    .feature-icon-blue {
+      background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+      box-shadow: 0 8px 16px rgba(59, 130, 246, 0.25);
+    }
+
+    .feature-icon-purple {
+      background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+      box-shadow: 0 8px 16px rgba(168, 85, 247, 0.25);
+    }
+
+    .feature-icon-wrapper:hover {
+      transform: scale(1.1) rotate(3deg);
+    }
+
+    .tilt-card.feature-card:hover .feature-icon-wrapper {
+      animation: none;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 900;
+      margin-bottom: 0.75rem;
+    }
+
+    body.dark h3 {
+      color: white;
+    }
+
+    body.light h3 {
       color: #111;
     }
 
-    .problem-card p {
-      line-height: 1.75;
-    }
-
-    body.dark .problem-card p {
-      color: #d1d5db;
-    }
-
-    body.light .problem-card p {
-      color: #566573;
-    }
-
-    .emoji {
-      font-size: 3.5rem;
+    .feature-description {
+      flex-grow: 1;
       margin-bottom: 1rem;
+      line-height: 1.6;
     }
 
-    .accent-highlight {
-      color: #f59e0b;
+    body.dark .feature-description {
+      color: #9ca3af;
+    }
+
+    body.light .feature-description {
+      color: #4b5563;
+    }
+
+    .feature-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .feature-link span:last-child {
+      transform: translateX(0);
+      transition: transform 0.2s;
+    }
+
+    .tilt-card.feature-card:hover .feature-link span:last-child {
+      transform: translateX(4px);
+    }
+
+    body.dark .feature-link {
+      color: #6b7280;
+    }
+
+    body.dark .tilt-card.feature-card:hover .feature-link {
+      color: #10b981;
+    }
+
+    body.light .feature-link {
+      color: #9ca3af;
+    }
+
+    body.light .tilt-card.feature-card:hover .feature-link {
+      color: #10b981;
+    }
+
+    /* About Section */
+    .about-section {
+      padding: 2rem 1.5rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    @media (min-width: 640px) {
+      .about-section {
+        padding: 4rem 2rem;
+      }
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .persona-card {
+      min-height: 380px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .persona-icon-wrapper {
+      width: 96px;
+      height: 96px;
+      border-radius: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 12px 24px;
+    }
+
+    .persona-icon-emerald {
+      background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+      box-shadow: 0 12px 24px rgba(16, 185, 129, 0.25);
+    }
+
+    .persona-icon-amber {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      box-shadow: 0 12px 24px rgba(245, 158, 11, 0.25);
+    }
+
+    .persona-icon-purple {
+      background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+      box-shadow: 0 12px 24px rgba(168, 85, 247, 0.25);
+    }
+
+    .tilt-card.persona-card:hover .persona-icon-wrapper {
+      animation: none;
+    }
+
+    .persona-description {
+      flex-grow: 1;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    body.dark .persona-description {
+      color: #9ca3af;
+    }
+
+    body.light .persona-description {
+      color: #4b5563;
+    }
+
+    .persona-stat {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.625rem 1.25rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    body.dark .persona-stat {
+      background: rgba(255,255,255,0.05);
+    }
+
+    body.light .persona-stat {
+      background: rgba(100, 116, 139, 0.1);
+    }
+
+    .stat-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    /* Blog Preview */
+    .blog-preview {
+      padding: 2rem 1.5rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    @media (min-width: 640px) {
+      .blog-preview {
+        padding: 4rem 2rem;
+      }
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .blog-card {
+      overflow: hidden;
+      border-radius: 1.5rem;
+      border: 1px solid;
+      transition: all 0.3s;
+    }
+
+    body.dark .blog-card {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.1);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+    }
+
+    body.light .blog-card {
+      background: rgba(255,255,255,0.9);
+      border-color: rgba(255,255,255,0.8);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+    }
+
+    .blog-card:hover {
+      transform: translateY(-8px);
+    }
+
+    body.dark .blog-card:hover {
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+
+    body.light .blog-card:hover {
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+
+    .blog-card-content {
+      padding: 1.5rem;
+    }
+
+    .blog-category {
+      font-size: 0.75rem;
       font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.75rem;
+    }
+
+    .blog-category-nutrition {
+      color: #10b981;
+    }
+
+    .blog-category-wellness {
+      color: #f59e0b;
+    }
+
+    .blog-category-recipes {
+      color: #06b6d4;
+    }
+
+    .blog-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+    }
+
+    body.dark .blog-title {
+      color: white;
+    }
+
+    body.light .blog-title {
+      color: #111;
+    }
+
+    .blog-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.875rem;
+      margin-top: 1rem;
+    }
+
+    body.dark .blog-meta {
+      color: #6b7280;
+    }
+
+    body.light .blog-meta {
+      color: #6b7280;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      padding: 2rem 1.5rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    @media (min-width: 640px) {
+      .cta-section {
+        padding: 4rem 2rem;
+      }
+    }
+
+    .cta-container {
+      max-width: 64rem;
+      margin: 0 auto;
+    }
+
+    .cta-primary {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      padding: 2rem;
+      border-radius: 2rem;
+      text-align: center;
+      border: 1px solid;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.1));
+      border-color: rgba(16, 185, 129, 0.2);
+    }
+
+    @media (min-width: 640px) {
+      .cta-primary {
+        flex-direction: row;
+        align-items: center;
+        text-align: left;
+        padding: 2rem 3rem;
+      }
+    }
+
+    .cta-content {
+      flex-grow: 1;
+    }
+
+    .cta-headline {
+      font-size: 1.875rem;
+      font-weight: 900;
+      margin-bottom: 0.5rem;
+    }
+
+    body.dark .cta-headline {
+      color: white;
+    }
+
+    body.light .cta-headline {
+      color: #111;
+    }
+
+    .cta-text {
+      line-height: 1.6;
+      margin-bottom: 0;
+    }
+
+    body.dark .cta-text {
+      color: #9ca3af;
+    }
+
+    body.light .cta-text {
+      color: #4b5563;
     }
 
     /* Footer */
@@ -702,417 +1333,554 @@
     }
 
     body.dark footer {
-      border-color: rgba(255,255,255,0.1);
+      border-top-color: rgba(255,255,255,0.1);
       background: rgba(0,0,0,0.4);
     }
 
     body.light footer {
-      border-color: #e5e7eb;
-      background: rgba(255,255,255,0.8);
+      border-top-color: rgba(0,0,0,0.05);
+      background: rgba(255,255,255,0.5);
     }
 
     .footer-content {
       max-width: 80rem;
       margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 2rem;
-      margin-bottom: 2rem;
-      padding-bottom: 2rem;
-      border-bottom: 1px solid;
-    }
-
-    body.dark .footer-content {
-      border-color: rgba(255,255,255,0.1);
-    }
-
-    body.light .footer-content {
-      border-color: #e5e7eb;
-    }
-
-    .footer-section h4 {
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-
-    body.dark .footer-section h4 {
-      color: white;
-    }
-
-    body.light .footer-section h4 {
-      color: #111;
-    }
-
-    .footer-link {
-      display: block;
-      text-decoration: none;
-      margin-bottom: 0.5rem;
-      transition: color 0.2s;
-    }
-
-    body.dark .footer-link {
-      color: #9ca3af;
-    }
-
-    body.dark .footer-link:hover {
-      color: white;
-    }
-
-    body.light .footer-link {
-      color: #4b5563;
-    }
-
-    body.light .footer-link:hover {
-      color: #111;
-    }
-
-    .footer-bottom {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      align-items: center;
       text-align: center;
+    }
+
+    .footer-text {
       font-size: 0.875rem;
     }
 
-    body.dark .footer-bottom {
-      color: #9ca3af;
+    body.dark .footer-text {
+      color: #6b7280;
     }
 
-    body.light .footer-bottom {
-      color: #4b5563;
+    body.light .footer-text {
+      color: #6b7280;
     }
 
-    .floating-emoji {
-      position: fixed;
-      pointer-events: none;
-      animation: float-3d 6s ease-in-out infinite;
-      opacity: 0.4;
+    .footer-link {
+      color: var(--primary);
+      text-decoration: none;
+      transition: opacity 0.2s;
     }
 
-    @media (max-width: 768px) {
-      .floating-emoji {
-        display: none;
-      }
+    .footer-link:hover {
+      opacity: 0.7;
     }
 
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(16px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .container {
+    /* Utility classes */
+    .max-w-7xl {
       max-width: 80rem;
-      margin: 0 auto;
-      padding: 0 1.5rem;
+    }
+
+    .mx-auto {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .relative {
+      position: relative;
     }
   </style>
 </head>
-<body class="light">
-  <!-- Background -->
+<body class="dark">
+  <!-- Background Effects -->
   <div class="background">
-    <div class="aurora" style="background: conic-gradient(from 0deg at 50% 50%, #10b981 0deg, #06b6d4 60deg, #8b5cf6 120deg, #ec4899 180deg, #f59e0b 240deg, #10b981 300deg, #10b981 360deg);"></div>
-    <div class="aurora desktop-only" style="width: 900px; height: 900px; bottom: -30%; right: -15%; background: radial-gradient(circle, #10b981 0%, #06b6d4 50%, transparent 70%); animation: float 20s ease-in-out infinite;"></div>
+    <div class="aurora-gradient"></div>
+    <div class="aurora-secondary"></div>
+    <div class="mesh-gradient"></div>
   </div>
 
   <!-- Floating Emojis -->
-  <div class="floating-emoji" style="left: 5%; top: 20%; font-size: 3.5rem; animation-delay: 0s;">🥗</div>
-  <div class="floating-emoji" style="right: 8%; top: 15%; font-size: 4.5rem; animation-delay: 2s;">💪</div>
-  <div class="floating-emoji" style="left: 12%; top: 75%; font-size: 2.5rem; animation-delay: 4s;">🍳</div>
-  <div class="floating-emoji" style="right: 12%; top: 65%; font-size: 3.5rem; animation-delay: 1s;">🥑</div>
-  <div class="floating-emoji" style="left: 50%; top: 85%; font-size: 2.5rem; animation-delay: 3s;">🏋️</div>
-  <div class="floating-emoji" style="right: 22%; top: 35%; font-size: 2rem; animation-delay: 5s;">🎯</div>
+  <div class="floating-emojis" id="floatingEmojis"></div>
 
   <!-- Header -->
   <header>
     <div class="header-container">
       <div class="header-bar">
-        <a href="#" class="logo">
-          <div class="logo-image">🌱</div>
-          <span class="beta-badge">
-            <span class="ping"></span>
-            BETA
-          </span>
-        </a>
-        <nav>
-          <button class="theme-toggle" id="themeToggle">
-            <div class="toggle-circle">☀️</div>
-          </button>
-          <a href="privacy.html" class="nav-link">Privacy</a>
-          <a href="blog.html" class="cta-button dark">
-            <span>📚</span>
-            <span>Blog</span>
-            <span>→</span>
+        <div class="header-left">
+          <a href="/" class="logo">
+            <div class="logo-image">🌱</div>
+            <span>Vitore</span>
           </a>
+          <div class="beta-badge">
+            <div class="ping"></div>
+            <span>BETA</span>
+          </div>
+        </div>
+        <nav>
+          <a href="/blog" class="nav-link">📚 Blog</a>
+          <a href="/privacy-policy" class="nav-link">Privacy</a>
+          <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+            <div class="toggle-circle" id="toggleCircle">🌙</div>
+          </button>
         </nav>
       </div>
     </div>
   </header>
 
-  <!-- Main -->
-  <main>
-    <!-- Hero Section -->
-    <section class="hero">
-      <div class="hero-content">
-        <div class="hero-badge">
-          <span class="ping"></span>
-          <span>Now available on iOS & Android</span>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-decorations">
+      <div class="hero-gradient-orb orb-1"></div>
+      <div class="hero-gradient-orb orb-2"></div>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-badge">
+        <div class="ping"></div>
+        <span>Now available on iOS & Android</span>
+      </div>
+
+      <h1>
+        Vitore —
+        <span class="gradient-text">eat like you train.</span>
+      </h1>
+
+      <p class="subheading">
+        Meal plans, recipes, and a grocery list built around <span class="underline-text">your goal</span> — not generic "healthy food."
+      </p>
+
+      <div class="cta-group">
+        <a href="https://apps.apple.com/eg/app/vitore/id6754825790" class="cta-button app-store-btn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+          </svg>
+          <span>Download on App Store</span>
+          <span>→</span>
+        </a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdxw5JPvroDy9AfwuYplFHglcLcb5T-91qZt9Yy5SJQhLwN5w/viewform?usp=dialog" class="cta-button android-btn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 010 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/>
+          </svg>
+          <span>Get Android Early Access</span>
+          <span>→</span>
+        </a>
+      </div>
+
+      <p class="hero-note">⚡ Takes 20 seconds • Use the same Google email on your phone</p>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">👥</div>
+          <div class="stat-value"><span id="stat-users">5000</span>+</div>
+          <div class="stat-label">Active Users</div>
         </div>
-
-        <h1>
-          <span>Vitore —</span>
-          <span class="gradient-text">eat like you train.</span>
-        </h1>
-
-        <p class="subheading">
-          Meal plans, recipes, and a grocery list built around <strong>your goal</strong> — not generic "healthy food."
-        </p>
-
-        <div class="cta-group">
-          <a href="https://apps.apple.com/eg/app/vitore/id6754825790" target="_blank" class="cta-button app-store-btn">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
-            </svg>
-            <span>Download on App Store</span>
-            <span>→</span>
-          </a>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSdxw5JPvroDy9AfwuYplFHglcLcb5T-91qZt9Yy5SJQhLwN5w/viewform" target="_blank" class="cta-button android-btn">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-              <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 010 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z" />
-            </svg>
-            <span>Get Android Early Access</span>
-            <span>→</span>
-          </a>
+        <div class="stat-card">
+          <div class="stat-icon">🍽️</div>
+          <div class="stat-value"><span id="stat-meals">50000</span>+</div>
+          <div class="stat-label">Meals Generated</div>
         </div>
-
-        <p class="hero-note">⚡ Takes 20 seconds • Use the same Google email on your phone</p>
-
-        <!-- Stats -->
-        <div class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-icon">👥</div>
-            <div class="stat-number" id="stat1">42<span>+</span></div>
-            <div class="stat-label">Active Users</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-icon">🍽️</div>
-            <div class="stat-number" id="stat2">1071<span>+</span></div>
-            <div class="stat-label">Meals Generated</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-icon">🎯</div>
-            <div class="stat-number" id="stat3">97<span>+</span></div>
-            <div class="stat-label">Plans Generated</div>
-          </div>
+        <div class="stat-card">
+          <div class="stat-icon">🎯</div>
+          <div class="stat-value"><span id="stat-plans">15000</span>+</div>
+          <div class="stat-label">Plans Generated</div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Problem Section -->
-    <section class="problem">
-      <div class="container">
-        <div class="section-header">
-          <span class="divider"></span>
-          The Problem
-          <span class="divider right"></span>
-        </div>
+  <!-- Problem Section -->
+  <section class="problem-section">
+    <div class="section-container">
+      <div class="section-header">
+        <div class="section-label">The Problem</div>
+        <h2>Why most diets <span class="highlight">fail</span></h2>
+      </div>
 
-        <h2>Why most diets <span class="red-text">fail</span></h2>
-
-        <div class="problem-grid">
-          <div class="problem-card">
-            <div class="emoji">🤯</div>
+      <div class="bento-grid">
+        <div class="tilt-card problem-card">
+          <div class="tilt-card-inner">
+            <div class="tilt-card-glare"></div>
+            <div style="font-size: 3.5rem; margin-bottom: 1rem;">🤯</div>
             <h3>The Mental Load is Real</h3>
-            <p>The "plan" lives in one app… groceries in another… cooking in your head… and <span class="accent-highlight">consistency depends on motivation</span>.</p>
+            <p style="flex: 1; margin: 0; line-height: 1.6;">The "plan" lives in one app… groceries in another… cooking in your head… and <strong>consistency depends on motivation</strong>.</p>
           </div>
+        </div>
 
-          <div class="problem-card">
-            <div class="emoji">❌</div>
-            <h3>Generic Plans Don't Work</h3>
-            <p>A "healthy diet" is not your diet. You need something built for <span class="accent-highlight">your goals, your taste, your life</span>.</p>
+        <div class="tilt-card problem-card large">
+          <div class="tilt-card-inner">
+            <div class="large-number">95%</div>
+            <div class="large-text">of diets fail within the first year</div>
           </div>
+        </div>
 
-          <div class="problem-card">
-            <div class="emoji">⏰</div>
-            <h3>No Time for the Prep</h3>
-            <p>Even if you know what to eat, sourcing it locally, prepping, cooking takes <span class="accent-highlight">time you don't have</span>.</p>
+        <div class="tilt-card problem-card">
+          <div class="tilt-card-inner">
+            <div class="tilt-card-glare"></div>
+            <div style="font-size: 2.5rem; margin-bottom: 1rem;">📱</div>
+            <h3>Too many apps to juggle</h3>
+          </div>
+        </div>
+
+        <div class="tilt-card problem-card">
+          <div class="tilt-card-inner">
+            <div class="tilt-card-glare"></div>
+            <div style="font-size: 2.5rem; margin-bottom: 1rem;">🧠</div>
+            <h3>Decision fatigue kills consistency</h3>
+          </div>
+        </div>
+
+        <div class="tilt-card problem-card">
+          <div class="tilt-card-inner">
+            <div class="tilt-card-glare"></div>
+            <div style="font-size: 2.5rem; margin-bottom: 1rem;">⏰</div>
+            <h3>No time to plan everything</h3>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Solution Section -->
-    <section class="problem" style="padding: 3rem 1.5rem;">
-      <div class="container">
-        <div class="section-header">
-          <span class="divider"></span>
-          The Solution
-          <span class="divider right"></span>
+  <!-- Features Section -->
+  <section class="features-section">
+    <div class="features-bg"></div>
+    <div class="section-container relative">
+      <div class="section-header">
+        <div class="section-label" style="color: #10b981;">Features</div>
+        <h2>What <span class="gradient-text">Vitore</span> does</h2>
+        <p style="font-size: 1.25rem; line-height: 1.6; max-width: 32rem; margin: 1rem auto 0;">Everything you need to reach your fitness goals, seamlessly connected.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="tilt-card feature-card">
+          <div class="tilt-card-inner">
+            <div class="tilt-card-glare"></div>
+            <div class="feature-icon-wrapper feature-icon-emerald">🎯</div>
+            <h3>Personal Meal Plan</h3>
+            <p class="feature-description">Tailored to your goals, preferences, and lifestyle</p>
+            <div class="feature-link"><span>Learn more</span> <span>→</span></div>
+          </div>
         </div>
 
-        <h2>Meet <span class="gradient-text" style="background: linear-gradient(to right, #10b981, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Vitore</span></h2>
-
-        <div class="problem-grid">
-          <div class="problem-card">
-            <div class="emoji">🎯</div>
-            <h3>Your Goal</h3>
-            <p>Start with what you want: lose weight, build muscle, manage diabetes, or just feel better. Not someone else's goal.</p>
+        <div class="tilt-card feature-card">
+          <div class="tilt-card-inner">
+            <div class="tilt-card-glare"></div>
+            <div class="feature-icon-wrapper feature-icon-amber">🍳</div>
+            <h3>Real Recipes</h3>
+            <p class="feature-description">Practical meals you'll actually make, not influencer food</p>
+            <div class="feature-link"><span>Learn more</span> <span>→</span></div>
           </div>
+        </div>
 
-          <div class="problem-card">
-            <div class="emoji">🤖</div>
-            <h3>AI Does the Work</h3>
-            <p>Get personalized meal plans and recipes that actually match your fitness goals, not generic "healthy" recommendations.</p>
+        <div class="tilt-card feature-card">
+          <div class="tilt-card-inner">
+            <div class="tilt-card-glare"></div>
+            <div class="feature-icon-wrapper feature-icon-blue">🛒</div>
+            <h3>Auto Grocery List</h3>
+            <p class="feature-description">One tap to know exactly what to buy</p>
+            <div class="feature-link"><span>Learn more</span> <span>→</span></div>
           </div>
+        </div>
 
-          <div class="problem-card">
-            <div class="emoji">🛒</div>
-            <h3>Grocery List Ready</h3>
-            <p>Everything in one place—meal plan, recipes, AND a grocery list. No jumping between apps.</p>
+        <div class="tilt-card feature-card">
+          <div class="tilt-card-inner">
+            <div class="tilt-card-glare"></div>
+            <div class="feature-icon-wrapper feature-icon-purple">📊</div>
+            <h3>Built-in Tracking</h3>
+            <p class="feature-description">No more juggling between 5 different apps</p>
+            <div class="feature-link"><span>Learn more</span> <span>→</span></div>
           </div>
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about-section">
+    <div class="section-container">
+      <div class="section-header">
+        <div class="section-label" style="color: #f59e0b;">Who It's For</div>
+        <h2>Built for <span style="background: linear-gradient(to right, #f59e0b, #d97706); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">achievers</span></h2>
+      </div>
+
+      <div class="about-grid">
+        <div class="tilt-card persona-card">
+          <div class="tilt-card-inner">
+            <div class="tilt-card-glare"></div>
+            <div class="persona-icon-wrapper persona-icon-emerald">💪</div>
+            <h3>Gym Enthusiasts</h3>
+            <p class="persona-description">Who want results without overthinking every meal</p>
+            <div class="persona-stat">
+              <span class="stat-dot" style="background: linear-gradient(135deg, #10b981, #14b8a6);"></span>
+              <span>2-3 hrs/week saved</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tilt-card persona-card">
+          <div class="tilt-card-inner">
+            <div class="tilt-card-glare"></div>
+            <div class="persona-icon-wrapper persona-icon-amber">⏰</div>
+            <h3>Busy Professionals</h3>
+            <p class="persona-description">Students & workers who need a plan they can actually follow</p>
+            <div class="persona-stat">
+              <span class="stat-dot" style="background: linear-gradient(135deg, #f59e0b, #d97706);"></span>
+              <span>Zero decision fatigue</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tilt-card persona-card">
+          <div class="tilt-card-inner">
+            <div class="tilt-card-glare"></div>
+            <div class="persona-icon-wrapper persona-icon-purple">🎯</div>
+            <h3>Goal-Driven People</h3>
+            <p class="persona-description">Anyone tired of guessing their calories & macros</p>
+            <div class="persona-stat">
+              <span class="stat-dot" style="background: linear-gradient(135deg, #a855f7, #ec4899);"></span>
+              <span>Precision nutrition</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog Preview -->
+  <section class="blog-preview">
+    <div class="section-container">
+      <div class="section-header">
+        <div class="section-label" style="color: #06b6d4;">Blog</div>
+        <h2>Featured Articles</h2>
+      </div>
+
+      <div class="blog-grid">
+        <a href="/blog/diabetes-friendly-eating-egypt.html" class="blog-card">
+          <div class="blog-card-content">
+            <div class="blog-category blog-category-nutrition">NUTRITION</div>
+            <h3 class="blog-title">Diabetes-Friendly Eating in Egypt</h3>
+            <p class="feature-description">Smart choices for managing blood sugar with Egyptian foods</p>
+            <div class="blog-meta">
+              <span>5 min read</span>
+              <span>•</span>
+              <span>Health</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="/blog/healthy-koshari-recipe-weight-loss.html" class="blog-card">
+          <div class="blog-card-content">
+            <div class="blog-category blog-category-recipes">RECIPES</div>
+            <h3 class="blog-title">Healthy Koshari for Weight Loss</h3>
+            <p class="feature-description">50% less carbs, same love for Egypt's favorite dish</p>
+            <div class="blog-meta">
+              <span>7 min read</span>
+              <span>•</span>
+              <span>Recipes</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="/blog/gym-nutrition-guide-egypt.html" class="blog-card">
+          <div class="blog-card-content">
+            <div class="blog-category blog-category-wellness">WELLNESS</div>
+            <h3 class="blog-title">Gym Nutrition Guide for Egypt</h3>
+            <p class="feature-description">Pre & post-workout nutrition using local foods</p>
+            <div class="blog-meta">
+              <span>8 min read</span>
+              <span>•</span>
+              <span>Fitness</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="cta-container">
+      <div class="cta-primary">
+        <div class="cta-content">
+          <h2 class="cta-headline">Ready to transform your nutrition?</h2>
+          <p class="cta-text">Start your personalized meal plan in less than 20 seconds. Available on iOS and Android.</p>
+        </div>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdxw5JPvroDy9AfwuYplFHglcLcb5T-91qZt9Yy5SJQhLwN5w/viewform?usp=dialog" class="cta-button android-btn" style="flex-shrink: 0;">
+          Get Started → 
+        </a>
+      </div>
+    </div>
+  </section>
 
   <!-- Footer -->
   <footer>
     <div class="footer-content">
-      <div class="footer-section">
-        <h4>Product</h4>
-        <a href="https://apps.apple.com/eg/app/vitore/id6754825790" target="_blank" class="footer-link">iOS App</a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdxw5JPvroDy9AfwuYplFHglcLcb5T-91qZt9Yy5SJQhLwN5w/viewform" target="_blank" class="footer-link">Android (Early Access)</a>
-        <a href="blog.html" class="footer-link">Blog</a>
-      </div>
-      <div class="footer-section">
-        <h4>Company</h4>
-        <a href="privacy.html" class="footer-link">Privacy Policy</a>
-        <a href="mailto:support@vitore.org" class="footer-link">Support</a>
-      </div>
-      <div class="footer-section">
-        <h4>Resources</h4>
-        <a href="blog.html" class="footer-link">Nutrition Guide</a>
-        <a href="blog.html" class="footer-link">Health Tips</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2026 Vitore. All rights reserved.</p>
-      <p>Built for nutrition. Loved in Egypt.</p>
+      <p class="footer-text">
+        © 2024 Vitore. • 
+        <a href="/privacy-policy" class="footer-link">Privacy Policy</a> • 
+        <a href="/blog" class="footer-link">Blog</a>
+      </p>
     </div>
   </footer>
 
   <script>
-    // Theme Toggle
-    const themeToggle = document.getElementById('themeToggle');
-    const html = document.documentElement;
-    const body = document.body;
-
-    // Load saved theme or detect system preference
-    function loadTheme() {
-      const saved = localStorage.getItem('vitore-theme');
-      if (saved) {
-        body.className = saved;
-        updateToggle(saved === 'dark');
-      } else {
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        body.className = prefersDark ? 'dark' : 'light';
-        updateToggle(prefersDark);
-      }
-    }
-
-    function updateToggle(isDark) {
-      const circle = themeToggle.querySelector('.toggle-circle');
-      circle.textContent = isDark ? '🌙' : '☀️';
-    }
-
-    themeToggle.addEventListener('click', () => {
-      const isDark = body.classList.contains('dark');
-      body.className = isDark ? 'light' : 'dark';
-      localStorage.setItem('vitore-theme', isDark ? 'light' : 'dark');
-      updateToggle(!isDark);
-    });
-
-    loadTheme();
-
-    // Counter Animation
-    function animateCounter(element, target, duration = 2000) {
-      let start = 0;
-      const increment = target / (duration / 16);
+    // Initialize floating emojis
+    function initFloatingEmojis() {
+      const container = document.getElementById('floatingEmojis');
+      const isMobile = window.innerWidth < 768;
       
-      const timer = setInterval(() => {
-        start += increment;
-        if (start >= target) {
-          element.textContent = target + '+';
-          clearInterval(timer);
-        } else {
-          element.textContent = Math.floor(start) + '+';
-        }
-      }, 16);
+      const emojis = isMobile 
+        ? [
+            { emoji: '💪', left: '85%', top: '15%', delay: '0s', size: 'text-4xl' },
+            { emoji: '🥑', left: '10%', top: '70%', delay: '1s', size: 'text-3xl' },
+            { emoji: '🎯', left: '75%', top: '60%', delay: '2s', size: 'text-3xl' },
+          ]
+        : [
+            { emoji: '🥗', left: '5%', top: '20%', delay: '0s', duration: '8s' },
+            { emoji: '💪', left: '92%', top: '15%', delay: '2s', duration: '10s' },
+            { emoji: '🍳', left: '12%', top: '75%', delay: '4s', duration: '9s' },
+            { emoji: '🥑', left: '88%', top: '65%', delay: '1s', duration: '11s' },
+            { emoji: '🏋️', left: '50%', top: '88%', delay: '3s', duration: '9s' },
+            { emoji: '🎯', left: '78%', top: '35%', delay: '5s', duration: '10s' },
+            { emoji: '⚡', left: '22%', top: '45%', delay: '2.5s', duration: '8s' },
+            { emoji: '🔥', left: '65%', top: '8%', delay: '1.5s', duration: '9s' },
+          ];
+
+      emojis.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'floating-emoji';
+        div.textContent = item.emoji;
+        div.style.left = item.left;
+        div.style.top = item.top;
+        div.style.setProperty('--delay', item.delay);
+        div.style.setProperty('--duration', item.duration || '6s');
+        container.appendChild(div);
+      });
     }
 
-    // Trigger animations when page loads
-    window.addEventListener('load', () => {
-      const stat1 = document.getElementById('stat1');
-      const stat2 = document.getElementById('stat2');
-      const stat3 = document.getElementById('stat3');
+    // Animated counter
+    function animateCounter(elementId, targetValue, duration = 2000) {
+      const element = document.getElementById(elementId);
+      if (!element) return;
 
-      // Use Intersection Observer to animate when visible
+      let startValue = 0;
+      const startTime = Date.now();
+
+      function update() {
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const currentValue = Math.floor(startValue + (targetValue - startValue) * progress);
+        element.textContent = currentValue.toLocaleString();
+
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        }
+      }
+
+      // Use Intersection Observer to animate on scroll
       const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            if (entry.target === stat1 && !stat1.dataset.animated) {
-              animateCounter(stat1, 42, 2000);
-              stat1.dataset.animated = 'true';
-            }
-            if (entry.target === stat2 && !stat2.dataset.animated) {
-              animateCounter(stat2, 1071, 2000);
-              stat2.dataset.animated = 'true';
-            }
-            if (entry.target === stat3 && !stat3.dataset.animated) {
-              animateCounter(stat3, 97, 1500);
-              stat3.dataset.animated = 'true';
-            }
-          }
-        });
+        if (entries[0].isIntersecting && startValue === 0) {
+          update();
+          observer.disconnect();
+        }
+      }, { threshold: 0.5 });
+
+      observer.observe(element);
+    }
+
+    // Theme toggle
+    function initThemeToggle() {
+      const toggle = document.getElementById('themeToggle');
+      const toggleCircle = document.getElementById('toggleCircle');
+      const body = document.body;
+
+      // Check saved theme
+      const savedTheme = localStorage.getItem('vitore-theme') || 'dark';
+      body.className = savedTheme;
+      updateToggleCircle(savedTheme);
+
+      toggle.addEventListener('click', () => {
+        const isDark = body.classList.contains('dark');
+        const newTheme = isDark ? 'light' : 'dark';
+        body.className = newTheme;
+        localStorage.setItem('vitore-theme', newTheme);
+        updateToggleCircle(newTheme);
       });
 
-      observer.observe(stat1);
-      observer.observe(stat2);
-      observer.observe(stat3);
-    });
-  </script>
-
-  <!-- Schema.org JSON-LD -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "MobileApplication",
-        "name": "Vitore",
-        "operatingSystem": ["iOS", "Android"],
-        "applicationCategory": "HealthApplication",
-        "description": "AI-powered meal planner that creates personalized meal plans, recipes, and grocery lists based on your fitness goals.",
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD"
-        }
-      },
-      {
-        "@type": "Organization",
-        "name": "Vitore",
-        "url": "https://vitore.org",
-        "logo": "https://vitore.org/logo.png"
+      function updateToggleCircle(theme) {
+        toggleCircle.textContent = theme === 'dark' ? '🌙' : '☀️';
       }
-    ]
-  }
+    }
+
+    // Interactive mesh gradient (desktop only)
+    function initMeshGradient() {
+      if (window.innerWidth < 768) return;
+
+      const meshGradient = document.querySelector('.mesh-gradient');
+      document.addEventListener('mousemove', (e) => {
+        const x = e.clientX;
+        const y = e.clientY;
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+
+        const gradientX = (x / vw) * 100;
+        const gradientY = (y / vh) * 100;
+
+        meshGradient.style.backgroundImage = `
+          radial-gradient(at ${20 + gradientX * 0.02}% ${20 + gradientY * 0.02}%, rgba(16, 185, 129, 0.4) 0px, transparent 50%),
+          radial-gradient(at ${80 - gradientX * 0.02}% ${30 + gradientY * 0.02}%, rgba(6, 182, 212, 0.3) 0px, transparent 50%),
+          radial-gradient(at ${50 + gradientX * 0.01}% ${80 - gradientY * 0.02}%, rgba(139, 92, 246, 0.3) 0px, transparent 50%)
+        `;
+      });
+    }
+
+    // 3D Tilt effect for cards
+    function init3DTilt() {
+      if (window.innerWidth < 768) return;
+
+      const tiltCards = document.querySelectorAll('.tilt-card');
+
+      tiltCards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          const rotateX = (y - centerY) / 12;
+          const rotateY = (centerX - x) / 12;
+
+          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+
+          // Update glare position
+          const glareX = (x / rect.width) * 100;
+          const glareY = (y / rect.height) * 100;
+          const glare = card.querySelector('.tilt-card-glare');
+          if (glare) {
+            glare.style.setProperty('--glare-x', `${glareX}%`);
+            glare.style.setProperty('--glare-y', `${glareY}%`);
+          }
+        });
+
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+        });
+      });
+    }
+
+    // Initialize everything
+    document.addEventListener('DOMContentLoaded', () => {
+      initFloatingEmojis();
+      initThemeToggle();
+      initMeshGradient();
+      init3DTilt();
+      animateCounter('stat-users', 5000);
+      animateCounter('stat-meals', 50000);
+      animateCounter('stat-plans', 15000);
+    });
+
+    // Re-initialize on window resize
+    window.addEventListener('resize', () => {
+      const wasMobile = document.querySelectorAll('.floating-emoji').length > 0;
+      const isMobile = window.innerWidth < 768;
+
+      if (wasMobile !== isMobile) {
+        location.reload();
+      }
+    });
   </script>
 </body>
 </html>
