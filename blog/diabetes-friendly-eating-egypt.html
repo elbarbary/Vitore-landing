@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diabetes-Friendly Eating in Egypt | Vitore Blog</title>
+  <meta name="description" content="Learn how to manage diabetes through diet with Egyptian foods. Discover low-glycemic versions of koshari, ful medames, and traditional dishes.">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.7;
+    }
+
+    :root {
+      --primary: #10b981;
+      --secondary: #06b6d4;
+    }
+
+    body.dark {
+      background: #0a0a0a;
+      color: white;
+    }
+
+    body.light {
+      background: #fafbfc;
+      color: #111;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+    }
+
+    .header-container {
+      margin: 0.5rem;
+      max-width: 1280px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .header-bar {
+      backdrop-filter: blur(32px);
+      border: 1px solid rgba(255,255,255,0.6);
+      border-radius: 1rem;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    body.dark .header-bar {
+      background: rgba(0,0,0,0.6);
+      border-color: rgba(255,255,255,0.1);
+    }
+
+    body.light .header-bar {
+      background: rgba(255,255,255,0.8);
+      border-color: rgba(255,255,255,0.6);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: inherit;
+      font-weight: 700;
+    }
+
+    .logo-image {
+      font-size: 24px;
+    }
+
+    nav {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    body.light .nav-link {
+      color: #4b5563;
+    }
+
+    body.light .nav-link:hover {
+      background: rgba(229, 231, 235, 0.8);
+    }
+
+    body.dark .nav-link {
+      color: #9ca3af;
+    }
+
+    body.dark .nav-link:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .theme-toggle {
+      width: 50px;
+      height: 28px;
+      border-radius: 9999px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 3px;
+      transition: all 0.5s;
+    }
+
+    body.light .theme-toggle {
+      background: linear-gradient(to right, #fcd34d, #fed7aa);
+    }
+
+    body.dark .theme-toggle {
+      background: #3f3f46;
+    }
+
+    .toggle-circle {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.5s;
+      font-size: 12px;
+    }
+
+    body.light .toggle-circle {
+      background: white;
+      transform: translateX(0);
+    }
+
+    body.dark .toggle-circle {
+      background: #1f2937;
+      transform: translateX(22px);
+    }
+
+    main {
+      margin-top: 100px;
+      padding: 3rem 1.5rem;
+      max-width: 48rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .article-header {
+      margin-bottom: 2rem;
+    }
+
+    .article-meta {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      font-size: 0.875rem;
+      flex-wrap: wrap;
+    }
+
+    .article-date {
+      opacity: 0.7;
+    }
+
+    .article-category {
+      background: var(--primary);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-weight: 600;
+    }
+
+    .article-header h1 {
+      font-size: 2rem;
+      font-weight: 900;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .article-description {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    .article-content {
+      margin-top: 2rem;
+    }
+
+    .article-content h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 2rem 0 1rem;
+    }
+
+    .article-content h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 1.5rem 0 0.75rem;
+    }
+
+    .article-content p {
+      margin-bottom: 1rem;
+      text-align: justify;
+    }
+
+    .article-content ul,
+    .article-content ol {
+      margin-left: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .article-content li {
+      margin-bottom: 0.5rem;
+    }
+
+    .article-content strong {
+      font-weight: 600;
+    }
+
+    .article-content em {
+      font-style: italic;
+      opacity: 0.9;
+    }
+
+    .highlight {
+      background: linear-gradient(120deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 600;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+
+    table th,
+    table td {
+      padding: 0.75rem;
+      text-align: left;
+    }
+
+    table th {
+      background: var(--primary);
+      color: white;
+      font-weight: 600;
+    }
+
+    body.dark table {
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    body.light table {
+      border: 1px solid #e5e7eb;
+    }
+
+    body.dark table tr:nth-child(even) {
+      background: rgba(255,255,255,0.02);
+    }
+
+    body.light table tr:nth-child(even) {
+      background: rgba(0,0,0,0.02);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--primary);
+      text-decoration: none;
+      margin-bottom: 2rem;
+      font-weight: 600;
+    }
+
+    .back-link:hover {
+      opacity: 0.8;
+    }
+
+    footer {
+      padding: 2rem 1.5rem;
+      text-align: center;
+      border-top: 1px solid;
+      margin-top: 3rem;
+    }
+
+    body.dark footer {
+      border-color: rgba(255,255,255,0.1);
+      color: #9ca3af;
+    }
+
+    body.light footer {
+      border-color: #e5e7eb;
+      color: #4b5563;
+    }
+
+    footer a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body class="light">
+  <header>
+    <div class="header-container">
+      <div class="header-bar">
+        <a href="../../index.html" class="logo">
+          <span class="logo-image">🌱</span>
+          <span>Vitore</span>
+        </a>
+        <nav>
+          <a href="../../index.html" class="nav-link">Home</a>
+          <a href="../blog.html" class="nav-link">Blog</a>
+          <a href="../../privacy.html" class="nav-link">Privacy</a>
+          <button class="theme-toggle" id="themeToggle">
+            <div class="toggle-circle">☀️</div>
+          </button>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <a href="../blog.html" class="back-link">← Back to Blog</a>
+
+    <article>
+      <header class="article-header">
+        <div class="article-meta">
+          <span class="article-date">February 3, 2026</span>
+          <span class="article-category">Health</span>
+        </div>
+        <h1>Diabetes-Friendly Eating in Egypt: A Complete Guide to Blood Sugar Control</h1>
+        <p class="article-description">Learn how to manage diabetes through diet with Egyptian foods. Discover low-glycemic versions of koshari, ful medames, and traditional dishes that won't spike your blood sugar.</p>
+      </header>
+
+      <div class="article-content">
+        <h2>Understanding Diabetes in Egypt</h2>
+        <p>Egypt faces one of the highest diabetes rates in the Middle East, with <strong>23.4% of adult women</strong> and <strong>18.8% of adult men</strong> living with diabetes. This makes dietary management crucial for millions of Egyptians.</p>
+
+        <h2>The Glycemic Index: Your Key to Blood Sugar Control</h2>
+        <p>The glycemic index (GI) measures how quickly foods raise blood sugar. For diabetes management, focus on:</p>
+        <ul>
+          <li><strong>Low GI foods (55 or less)</strong>: Most vegetables, legumes, whole grains</li>
+          <li><strong>Medium GI foods (56-69)</strong>: Brown rice, whole wheat bread</li>
+          <li><strong>High GI foods (70+)</strong>: White bread, white rice, sugary drinks</li>
+        </ul>
+
+        <h2>Diabetes-Friendly Egyptian Dishes</h2>
+        
+        <h3>1. Smart Koshari (كشري ذكي)</h3>
+        <p>Traditional koshari is high in carbs. Here's how to make it diabetes-friendly:</p>
+        <h4>Modifications:</h4>
+        <ul>
+          <li>Replace white rice with brown rice or cauliflower rice</li>
+          <li>Use whole wheat pasta instead of regular pasta</li>
+          <li>Double the lentils (high fiber, low GI)</li>
+          <li>Reduce the crispy onion topping</li>
+          <li>Use fresh tomato sauce without added sugar</li>
+        </ul>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Regular Koshari</th>
+              <th>Smart Koshari</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>85g carbs</td>
+              <td>45g carbs</td>
+            </tr>
+            <tr>
+              <td>3g fiber</td>
+              <td>12g fiber</td>
+            </tr>
+            <tr>
+              <td>GI: 75</td>
+              <td>GI: 45</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>2. Balanced Ful Medames (فول مدمس متوازن)</h3>
+        <p>Ful is naturally diabetes-friendly due to its high fiber and protein content. Optimize it by:</p>
+        <ul>
+          <li>Serving with whole grain baladi bread (limited portion)</li>
+          <li>Adding plenty of fresh vegetables (tomatoes, cucumber, peppers)</li>
+          <li>Using olive oil instead of ghee</li>
+          <li>Avoiding sugary drinks alongside</li>
+        </ul>
+        <p><strong>Per serving:</strong> 15g protein, 25g carbs, 8g fiber</p>
+
+        <h3>3. Molokhia the Right Way</h3>
+        <p>Molokhia (ملوخية) is excellent for diabetics:</p>
+        <ul>
+          <li>Very low in carbs (2g per serving)</li>
+          <li>High in fiber and vitamins</li>
+          <li>Pair with grilled chicken or fish instead of duck</li>
+          <li>Serve over brown rice or alone</li>
+        </ul>
+
+        <h2>Meal Timing for Blood Sugar Control</h2>
+        <p>Research shows that <span class="highlight">when</span> you eat is almost as important as <span class="highlight">what</span> you eat:</p>
+        <ol>
+          <li><strong>Eat at consistent times</strong> - helps regulate insulin</li>
+          <li><strong>Don't skip breakfast</strong> - prevents blood sugar spikes later</li>
+          <li><strong>Have protein with every meal</strong> - slows glucose absorption</li>
+          <li><strong>Eat vegetables first</strong> - fiber creates a buffer</li>
+        </ol>
+
+        <h2>Sample Diabetes-Friendly Day</h2>
+        
+        <h3>Breakfast (الفطور)</h3>
+        <ul>
+          <li>1 cup ful medames with olive oil</li>
+          <li>1/2 whole grain baladi bread</li>
+          <li>Fresh vegetable salad</li>
+          <li>Unsweetened tea</li>
+        </ul>
+
+        <h3>Lunch (الغداء)</h3>
+        <ul>
+          <li>Grilled fish or chicken</li>
+          <li>Large molokhia serving</li>
+          <li>1/2 cup brown rice</li>
+          <li>Green salad with lemon dressing</li>
+        </ul>
+
+        <h3>Dinner (العشاء)</h3>
+        <ul>
+          <li>Lentil soup (شوربة عدس)</li>
+          <li>Grilled vegetables</li>
+          <li>Small portion of low-fat cheese</li>
+        </ul>
+
+        <h3>Snacks (سناكس)</h3>
+        <ul>
+          <li>Handful of almonds or walnuts</li>
+          <li>Fresh cucumber and carrots</li>
+          <li>Sugar-free yogurt</li>
+        </ul>
+
+        <h2>Key Takeaways</h2>
+        <ol>
+          <li><strong>You don't have to give up Egyptian food</strong> - just modify it smartly</li>
+          <li><strong>Focus on fiber</strong> - it's your best friend for blood sugar control</li>
+          <li><strong>Watch portions</strong> - especially with bread and rice</li>
+          <li><strong>Add protein</strong> to every meal to slow glucose absorption</li>
+          <li><strong>Stay hydrated</strong> with water, not sugary drinks</li>
+        </ol>
+
+        <p style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.7; font-style: italic;">
+          This article is for educational purposes only and does not replace medical advice. Always consult your doctor or dietitian for personalized diabetes management.
+        </p>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Vitore. All rights reserved.</p>
+    <p><a href="../../index.html">Home</a> • <a href="../blog.html">Blog</a> • <a href="../../privacy.html">Privacy</a></p>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+
+    function loadTheme() {
+      const saved = localStorage.getItem('vitore-theme');
+      if (saved) {
+        body.className = saved;
+        updateToggle(saved === 'dark');
+      }
+    }
+
+    function updateToggle(isDark) {
+      const circle = themeToggle.querySelector('.toggle-circle');
+      circle.textContent = isDark ? '🌙' : '☀️';
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const isDark = body.classList.contains('dark');
+      body.className = isDark ? 'light' : 'dark';
+      localStorage.setItem('vitore-theme', isDark ? 'light' : 'dark');
+      updateToggle(!isDark);
+    });
+
+    loadTheme();
+  </script>
+</body>
+</html>

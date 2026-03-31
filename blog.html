@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog - Nutrition Tips & Healthy Living | Vitore</title>
+  <meta name="description" content="Expert nutrition advice, healthy Egyptian recipes, diet tips for diabetes & weight loss, Ramadan meal plans, and fitness nutrition.">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      overflow-x: hidden;
+    }
+
+    :root {
+      --primary: #10b981;
+      --secondary: #06b6d4;
+      --accent: #f59e0b;
+    }
+
+    body.dark {
+      background: #0a0a0a;
+      color: white;
+    }
+
+    body.light {
+      background: #fafbfc;
+      color: #111;
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+    }
+
+    .header-container {
+      margin: 0.5rem;
+      max-width: 1280px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .header-bar {
+      backdrop-filter: blur(32px);
+      border: 1px solid rgba(255,255,255,0.6);
+      border-radius: 1rem;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    body.dark .header-bar {
+      background: rgba(0,0,0,0.6);
+      border-color: rgba(255,255,255,0.1);
+    }
+
+    body.light .header-bar {
+      background: rgba(255,255,255,0.8);
+      border-color: rgba(255,255,255,0.6);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: inherit;
+      font-weight: 700;
+    }
+
+    .logo-image {
+      font-size: 24px;
+    }
+
+    nav {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    body.light .nav-link {
+      color: #4b5563;
+    }
+
+    body.light .nav-link:hover {
+      background: rgba(229, 231, 235, 0.8);
+    }
+
+    body.dark .nav-link {
+      color: #9ca3af;
+    }
+
+    body.dark .nav-link:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .theme-toggle {
+      width: 50px;
+      height: 28px;
+      border-radius: 9999px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 3px;
+      transition: all 0.5s;
+    }
+
+    body.light .theme-toggle {
+      background: linear-gradient(to right, #fcd34d, #fed7aa);
+    }
+
+    body.dark .theme-toggle {
+      background: #3f3f46;
+    }
+
+    .toggle-circle {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.5s;
+      font-size: 12px;
+    }
+
+    body.light .toggle-circle {
+      background: white;
+      transform: translateX(0);
+    }
+
+    body.dark .toggle-circle {
+      background: #1f2937;
+      transform: translateX(22px);
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      padding: 8rem 1.5rem 4rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 6vw, 3rem);
+      font-weight: 900;
+      margin-bottom: 1rem;
+    }
+
+    .gradient-text {
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.125rem;
+      max-width: 42rem;
+      margin: 1rem auto 2rem;
+    }
+
+    body.dark .hero p {
+      color: #9ca3af;
+    }
+
+    body.light .hero p {
+      color: #4b5563;
+    }
+
+    /* Blog Grid */
+    main {
+      padding: 2rem 1.5rem;
+      max-width: 80rem;
+      margin: 0 auto;
+    }
+
+    .blog-grid {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      margin: 3rem 0;
+    }
+
+    .blog-card {
+      border-radius: 1.5rem;
+      overflow: hidden;
+      border: 1px solid;
+      transition: all 0.3s;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    body.light .blog-card {
+      background: rgba(255,255,255,0.9);
+      border-color: rgba(255,255,255,0.8);
+    }
+
+    body.dark .blog-card {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.1);
+    }
+
+    .blog-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .blog-image {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+
+    .blog-content {
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .blog-meta {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      font-size: 0.875rem;
+    }
+
+    .blog-date {
+      opacity: 0.7;
+    }
+
+    .blog-category {
+      background: var(--primary);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-weight: 600;
+    }
+
+    .blog-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .blog-description {
+      opacity: 0.8;
+      flex: 1;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .blog-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .blog-tag {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      background: rgba(16, 185, 129, 0.2);
+      color: var(--primary);
+    }
+
+    .read-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      color: var(--primary);
+      align-self: flex-end;
+    }
+
+    /* Footer */
+    footer {
+      padding: 2rem 1.5rem;
+      text-align: center;
+      border-top: 1px solid;
+      margin-top: 4rem;
+    }
+
+    body.dark footer {
+      border-color: rgba(255,255,255,0.1);
+      color: #9ca3af;
+    }
+
+    body.light footer {
+      border-color: #e5e7eb;
+      color: #4b5563;
+    }
+
+    footer a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body class="light">
+  <header>
+    <div class="header-container">
+      <div class="header-bar">
+        <a href="index.html" class="logo">
+          <span class="logo-image">🌱</span>
+          <span>Vitore</span>
+        </a>
+        <nav>
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="privacy.html" class="nav-link">Privacy</a>
+          <button class="theme-toggle" id="themeToggle">
+            <div class="toggle-circle">☀️</div>
+          </button>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Blog</h1>
+      <p class="gradient-text" style="color: inherit;">Nutrition Tips & Healthy Living</p>
+      <p>Expert advice on Egyptian nutrition, diabetes management, fitness meal plans, and healthy recipes.</p>
+    </section>
+
+    <div class="blog-grid">
+      <a href="blog/diabetes-friendly-eating-egypt.html" class="blog-card">
+        <div class="blog-image">🩺</div>
+        <div class="blog-content">
+          <div class="blog-meta">
+            <span class="blog-date">Feb 3, 2026</span>
+            <span class="blog-category">Health</span>
+          </div>
+          <h2 class="blog-title">Diabetes-Friendly Eating in Egypt</h2>
+          <p class="blog-description">Complete guide to managing diabetes through diet with Egyptian foods. Learn low-glycemic versions of your favorite dishes.</p>
+          <div class="blog-tags">
+            <span class="blog-tag">diabetes</span>
+            <span class="blog-tag">Egyptian food</span>
+            <span class="blog-tag">health</span>
+          </div>
+          <div class="read-more">
+            Read Article <span>→</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="blog/healthy-koshari-recipe-weight-loss.html" class="blog-card">
+        <div class="blog-image">🍲</div>
+        <div class="blog-content">
+          <div class="blog-meta">
+            <span class="blog-date">Feb 1, 2026</span>
+            <span class="blog-category">Recipes</span>
+          </div>
+          <h2 class="blog-title">Healthy Koshari Recipe for Weight Loss</h2>
+          <p class="blog-description">Transform Egypt's beloved koshari into a healthy, weight-loss friendly meal. Cuts carbs by 50% while keeping authentic flavors.</p>
+          <div class="blog-tags">
+            <span class="blog-tag">koshari</span>
+            <span class="blog-tag">recipes</span>
+            <span class="blog-tag">weight loss</span>
+          </div>
+          <div class="read-more">
+            Read Article <span>→</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="blog/gym-nutrition-guide-egypt.html" class="blog-card">
+        <div class="blog-image">💪</div>
+        <div class="blog-content">
+          <div class="blog-meta">
+            <span class="blog-date">Jan 30, 2026</span>
+            <span class="blog-category">Fitness</span>
+          </div>
+          <h2 class="blog-title">Gym Nutrition Guide: Pre & Post Workout Meals</h2>
+          <p class="blog-description">Complete guide to gym nutrition with Egyptian foods. Pre-workout and post-workout meals for muscle building and fat loss.</p>
+          <div class="blog-tags">
+            <span class="blog-tag">fitness</span>
+            <span class="blog-tag">gym</span>
+            <span class="blog-tag">nutrition</span>
+          </div>
+          <div class="read-more">
+            Read Article <span>→</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="blog/ramadan-meal-planning-suhoor-iftar.html" class="blog-card">
+        <div class="blog-image">🌙</div>
+        <div class="blog-content">
+          <div class="blog-meta">
+            <span class="blog-date">Feb 2, 2026</span>
+            <span class="blog-category">Lifestyle</span>
+          </div>
+          <h2 class="blog-title">Ramadan Meal Planning: Suhoor & Iftar Recipes</h2>
+          <p class="blog-description">Healthy Ramadan nutrition guide with balanced suhoor and iftar meals. Maintain energy throughout the holy month.</p>
+          <div class="blog-tags">
+            <span class="blog-tag">ramadan</span>
+            <span class="blog-tag">fasting</span>
+            <span class="blog-tag">recipes</span>
+          </div>
+          <div class="read-more">
+            Read Article <span>→</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Vitore. All rights reserved.</p>
+    <p><a href="index.html">Home</a> • <a href="blog.html">Blog</a> • <a href="privacy.html">Privacy</a></p>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+
+    function loadTheme() {
+      const saved = localStorage.getItem('vitore-theme');
+      if (saved) {
+        body.className = saved;
+        updateToggle(saved === 'dark');
+      }
+    }
+
+    function updateToggle(isDark) {
+      const circle = themeToggle.querySelector('.toggle-circle');
+      circle.textContent = isDark ? '🌙' : '☀️';
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const isDark = body.classList.contains('dark');
+      body.className = isDark ? 'light' : 'dark';
+      localStorage.setItem('vitore-theme', isDark ? 'light' : 'dark');
+      updateToggle(!isDark);
+    });
+
+    loadTheme();
+  </script>
+</body>
+</html>

@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Healthy Koshari Recipe for Weight Loss | Vitore Blog</title>
+  <meta name="description" content="Transform Egypt's beloved koshari into a healthy, weight-loss friendly meal. Our modified recipe cuts carbs by 50% while keeping all the authentic flavors.">
+  <link rel="stylesheet" href="../../styles.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.7;
+    }
+
+    :root {
+      --primary: #10b981;
+      --secondary: #06b6d4;
+    }
+
+    body.dark {
+      background: #0a0a0a;
+      color: white;
+    }
+
+    body.light {
+      background: #fafbfc;
+      color: #111;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+    }
+
+    .header-container {
+      margin: 0.5rem;
+      max-width: 1280px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .header-bar {
+      backdrop-filter: blur(32px);
+      border: 1px solid rgba(255,255,255,0.6);
+      border-radius: 1rem;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    body.dark .header-bar {
+      background: rgba(0,0,0,0.6);
+      border-color: rgba(255,255,255,0.1);
+    }
+
+    body.light .header-bar {
+      background: rgba(255,255,255,0.8);
+      border-color: rgba(255,255,255,0.6);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: inherit;
+      font-weight: 700;
+    }
+
+    .logo-image {
+      font-size: 24px;
+    }
+
+    nav {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    body.light .nav-link {
+      color: #4b5563;
+    }
+
+    body.light .nav-link:hover {
+      background: rgba(229, 231, 235, 0.8);
+    }
+
+    body.dark .nav-link {
+      color: #9ca3af;
+    }
+
+    body.dark .nav-link:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .theme-toggle {
+      width: 50px;
+      height: 28px;
+      border-radius: 9999px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 3px;
+      transition: all 0.5s;
+    }
+
+    body.light .theme-toggle {
+      background: linear-gradient(to right, #fcd34d, #fed7aa);
+    }
+
+    body.dark .theme-toggle {
+      background: #3f3f46;
+    }
+
+    .toggle-circle {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.5s;
+      font-size: 12px;
+    }
+
+    body.light .toggle-circle {
+      background: white;
+      transform: translateX(0);
+    }
+
+    body.dark .toggle-circle {
+      background: #1f2937;
+      transform: translateX(22px);
+    }
+
+    main {
+      margin-top: 100px;
+      padding: 3rem 1.5rem;
+      max-width: 48rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .article-header {
+      margin-bottom: 2rem;
+    }
+
+    .article-meta {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      font-size: 0.875rem;
+      flex-wrap: wrap;
+    }
+
+    .article-date {
+      opacity: 0.7;
+    }
+
+    .article-category {
+      background: var(--primary);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-weight: 600;
+    }
+
+    .article-header h1 {
+      font-size: 2rem;
+      font-weight: 900;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .article-description {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    .article-content {
+      margin-top: 2rem;
+    }
+
+    .article-content h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 2rem 0 1rem;
+    }
+
+    .article-content h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 1.5rem 0 0.75rem;
+    }
+
+    .article-content h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 1rem 0 0.5rem;
+    }
+
+    .article-content p {
+      margin-bottom: 1rem;
+      text-align: justify;
+    }
+
+    .article-content ul,
+    .article-content ol {
+      margin-left: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .article-content li {
+      margin-bottom: 0.5rem;
+    }
+
+    .article-content strong {
+      font-weight: 600;
+    }
+
+    .article-content em {
+      font-style: italic;
+      opacity: 0.9;
+    }
+
+    .highlight {
+      background: linear-gradient(120deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 600;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+
+    table th,
+    table td {
+      padding: 0.75rem;
+      text-align: left;
+    }
+
+    table th {
+      background: var(--primary);
+      color: white;
+      font-weight: 600;
+    }
+
+    body.dark table {
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    body.light table {
+      border: 1px solid #e5e7eb;
+    }
+
+    body.dark table tr:nth-child(even) {
+      background: rgba(255,255,255,0.02);
+    }
+
+    body.light table tr:nth-child(even) {
+      background: rgba(0,0,0,0.02);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--primary);
+      text-decoration: none;
+      margin-bottom: 2rem;
+      font-weight: 600;
+    }
+
+    .back-link:hover {
+      opacity: 0.8;
+    }
+
+    footer {
+      padding: 2rem 1.5rem;
+      text-align: center;
+      border-top: 1px solid;
+      margin-top: 3rem;
+    }
+
+    body.dark footer {
+      border-color: rgba(255,255,255,0.1);
+      color: #9ca3af;
+    }
+
+    body.light footer {
+      border-color: #e5e7eb;
+      color: #4b5563;
+    }
+
+    footer a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body class="light">
+  <header>
+    <div class="header-container">
+      <div class="header-bar">
+        <a href="../../index.html" class="logo">
+          <span class="logo-image">🌱</span>
+          <span>Vitore</span>
+        </a>
+        <nav>
+          <a href="../../index.html" class="nav-link">Home</a>
+          <a href="../blog.html" class="nav-link">Blog</a>
+          <a href="../../privacy.html" class="nav-link">Privacy</a>
+          <button class="theme-toggle" id="themeToggle">
+            <div class="toggle-circle">☀️</div>
+          </button>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <a href="../blog.html" class="back-link">← Back to Blog</a>
+
+    <article>
+      <header class="article-header">
+        <div class="article-meta">
+          <span class="article-date">February 1, 2026</span>
+          <span class="article-category">Recipes</span>
+        </div>
+        <h1>Healthy Koshari Recipe: Low-Carb Egyptian Comfort Food for Weight Loss</h1>
+        <p class="article-description">Transform Egypt's beloved koshari into a healthy, weight-loss friendly meal. Our modified recipe cuts carbs by 50% while keeping all the authentic flavors you love.</p>
+      </header>
+
+      <div class="article-content">
+        <h2>Why We Love Koshari (and Why It Can Be Healthier)</h2>
+        <p>Koshari (كشري) is Egypt's national dish—a delicious combination of rice, pasta, lentils, and chickpeas, topped with spiced tomato sauce and crispy onions. But traditional koshari is also carb-heavy, with a single serving containing up to <strong>85g of carbohydrates</strong>.</p>
+
+        <h2>Nutritional Comparison</h2>
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Traditional Koshari</th>
+              <th>Healthy Koshari</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Calories</strong></td>
+              <td>650 kcal</td>
+              <td>380 kcal</td>
+            </tr>
+            <tr>
+              <td><strong>Carbs</strong></td>
+              <td>85g</td>
+              <td>42g</td>
+            </tr>
+            <tr>
+              <td><strong>Protein</strong></td>
+              <td>18g</td>
+              <td>24g</td>
+            </tr>
+            <tr>
+              <td><strong>Fiber</strong></td>
+              <td>8g</td>
+              <td>15g</td>
+            </tr>
+            <tr>
+              <td><strong>Fat</strong></td>
+              <td>22g</td>
+              <td>12g</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Healthy Koshari Recipe (Serves 4)</h2>
+
+        <h3>Ingredients / المكونات</h3>
+
+        <h4>For the Base:</h4>
+        <ul>
+          <li>1 cup brown lentils (عدس بني)</li>
+          <li>1 cup cauliflower rice OR 1/2 cup brown rice</li>
+          <li>1/2 cup whole wheat elbow pasta</li>
+          <li>1 can chickpeas, drained</li>
+        </ul>
+
+        <h4>For the Tomato Sauce:</h4>
+        <ul>
+          <li>4 fresh tomatoes, blended (or 1 can crushed tomatoes)</li>
+          <li>3 cloves garlic, minced</li>
+          <li>1 tbsp olive oil</li>
+          <li>1 tsp cumin</li>
+          <li>1/2 tsp coriander</li>
+          <li>1/4 tsp chili flakes</li>
+          <li>Salt and pepper to taste</li>
+          <li>1/2 cup water</li>
+        </ul>
+
+        <h4>For the Crispy Onions:</h4>
+        <ul>
+          <li>2 medium onions, thinly sliced</li>
+          <li>1 tbsp olive oil (instead of deep frying)</li>
+          <li>Pinch of salt</li>
+        </ul>
+
+        <h2>Instructions / طريقة التحضير</h2>
+
+        <h3>Step 1: Cook the Lentils</h3>
+        <ol>
+          <li>Rinse lentils and add to a pot with 3 cups water</li>
+          <li>Bring to boil, then simmer for 25-30 minutes until tender</li>
+          <li>Drain and set aside</li>
+        </ol>
+
+        <h3>Step 2: Prepare Other Components</h3>
+        <ol>
+          <li>Cook pasta according to package (al dente)</li>
+          <li>Cook rice or warm cauliflower rice</li>
+          <li>Heat chickpeas with a pinch of cumin</li>
+        </ol>
+
+        <h3>Step 3: Make the Tomato Sauce</h3>
+        <ol>
+          <li>Heat olive oil in a pan, sauté garlic (1 minute)</li>
+          <li>Add blended tomatoes, cumin, coriander, chili</li>
+          <li>Add water and simmer for 15-20 minutes</li>
+          <li>Season with salt and pepper</li>
+        </ol>
+
+        <h3>Step 4: Crispy Onions</h3>
+        <ol>
+          <li>Heat olive oil in a pan on medium-high</li>
+          <li>Add sliced onions and cook for 8-10 minutes until crispy</li>
+          <li>Season with salt</li>
+        </ol>
+
+        <h3>Step 5: Assemble</h3>
+        <ol>
+          <li>Layer base: rice/cauliflower rice → lentils → pasta</li>
+          <li>Top with chickpeas</li>
+          <li>Pour tomato sauce generously</li>
+          <li>Finish with crispy onions</li>
+        </ol>
+
+        <h2>Why This Recipe Works</h2>
+        <ul>
+          <li><strong>Cauliflower rice</strong> cuts carbs by 50% while keeping the texture</li>
+          <li><strong>Extra lentils</strong> add fiber and protein (good for satiety)</li>
+          <li><strong>Whole wheat pasta</strong> has more fiber than white</li>
+          <li><strong>Pan-fried onions</strong> instead of deep-fried saves calories</li>
+          <li><strong>Fresh tomato sauce</strong> has no added sugars</li>
+        </ul>
+
+        <h2>Pro Tips</h2>
+        <ul>
+          <li>Prep components the night before for quick assembly</li>
+          <li>Make double portions to have leftovers for lunch</li>
+          <li>Add grilled chicken on top for extra protein</li>
+          <li>Use Egyptian harissa for extra spice</li>
+          <li>Store in glass containers for up to 4 days</li>
+        </ul>
+
+        <p style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.7; font-style: italic;">
+          This recipe makes eating healthy Egyptian food easy and delicious. Enjoy!
+        </p>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Vitore. All rights reserved.</p>
+    <p><a href="../../index.html">Home</a> • <a href="../blog.html">Blog</a> • <a href="../../privacy.html">Privacy</a></p>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+
+    function loadTheme() {
+      const saved = localStorage.getItem('vitore-theme');
+      if (saved) {
+        body.className = saved;
+        updateToggle(saved === 'dark');
+      }
+    }
+
+    function updateToggle(isDark) {
+      const circle = themeToggle.querySelector('.toggle-circle');
+      circle.textContent = isDark ? '🌙' : '☀️';
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const isDark = body.classList.contains('dark');
+      body.className = isDark ? 'light' : 'dark';
+      localStorage.setItem('vitore-theme', isDark ? 'light' : 'dark');
+      updateToggle(!isDark);
+    });
+
+    loadTheme();
+  </script>
+</body>
+</html>

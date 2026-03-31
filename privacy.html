@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy | Vitore</title>
+  <meta name="description" content="How Vitore collects, uses, and protects data from users and partners.">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+    }
+
+    body.dark {
+      background: #0a0a0a;
+      color: #fff;
+    }
+
+    body.light {
+      background: #fafbfc;
+      color: #111;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+    }
+
+    .header-container {
+      margin: 0.5rem;
+      max-width: 1280px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .header-bar {
+      backdrop-filter: blur(32px);
+      border: 1px solid rgba(255,255,255,0.6);
+      border-radius: 1rem;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    body.dark .header-bar {
+      background: rgba(0,0,0,0.6);
+      border-color: rgba(255,255,255,0.1);
+    }
+
+    body.light .header-bar {
+      background: rgba(255,255,255,0.8);
+      border-color: rgba(255,255,255,0.6);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: inherit;
+      font-weight: 700;
+    }
+
+    .logo-image {
+      font-size: 24px;
+    }
+
+    nav {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    body.light .nav-link {
+      color: #4b5563;
+    }
+
+    body.light .nav-link:hover {
+      background: rgba(229, 231, 235, 0.8);
+    }
+
+    body.dark .nav-link {
+      color: #9ca3af;
+    }
+
+    body.dark .nav-link:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .theme-toggle {
+      width: 50px;
+      height: 28px;
+      border-radius: 9999px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 3px;
+      transition: all 0.5s;
+    }
+
+    body.light .theme-toggle {
+      background: linear-gradient(to right, #fcd34d, #fed7aa);
+    }
+
+    body.dark .theme-toggle {
+      background: #3f3f46;
+    }
+
+    .toggle-circle {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.5s;
+      font-size: 12px;
+    }
+
+    body.light .toggle-circle {
+      background: white;
+      transform: translateX(0);
+    }
+
+    body.dark .toggle-circle {
+      background: #1f2937;
+      transform: translateX(22px);
+    }
+
+    main {
+      margin-top: 100px;
+      padding: 3rem 1.5rem;
+      max-width: 56rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .policy-header {
+      margin-bottom: 2rem;
+    }
+
+    .policy-header p {
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+
+    body.dark .policy-header p {
+      color: #10b981;
+    }
+
+    body.light .policy-header p {
+      color: #059669;
+    }
+
+    .policy-header h1 {
+      font-size: 2.25rem;
+      font-weight: 900;
+      margin-bottom: 0.5rem;
+    }
+
+    .policy-header .updated {
+      font-size: 0.875rem;
+    }
+
+    body.dark .policy-header .updated {
+      color: #9ca3af;
+    }
+
+    body.light .policy-header .updated {
+      color: #4b5563;
+    }
+
+    .policy-section {
+      margin-bottom: 2rem;
+    }
+
+    .policy-section h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      margin-top: 2rem;
+    }
+
+    .policy-section ul {
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .policy-section li {
+      margin-bottom: 0.75rem;
+      line-height: 1.7;
+    }
+
+    body.dark .policy-section {
+      color: #d1d5db;
+    }
+
+    body.light .policy-section {
+      color: #374151;
+    }
+
+    footer {
+      padding: 2rem 1.5rem;
+      text-align: center;
+      border-top: 1px solid;
+      margin-top: 3rem;
+    }
+
+    body.dark footer {
+      border-color: rgba(255,255,255,0.1);
+      color: #9ca3af;
+    }
+
+    body.light footer {
+      border-color: #e5e7eb;
+      color: #4b5563;
+    }
+
+    footer a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body class="light">
+  <header>
+    <div class="header-container">
+      <div class="header-bar">
+        <a href="index.html" class="logo">
+          <span class="logo-image">🌱</span>
+          <span>Vitore</span>
+        </a>
+        <nav>
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="blog.html" class="nav-link">Blog</a>
+          <button class="theme-toggle" id="themeToggle">
+            <div class="toggle-circle">☀️</div>
+          </button>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="policy-header">
+      <p>Vitore</p>
+      <h1>Privacy Policy</h1>
+      <p class="updated">Last updated: October 12, 2025</p>
+    </div>
+
+    <div class="policy-section">
+      <p>At Vitore we help users achieve their health and fitness goals through personalized meal planning and nutrition guidance. Protecting the data you trust us with is a responsibility we take seriously. This policy explains what we collect, how we use it, and your rights.</p>
+    </div>
+
+    <div class="policy-section">
+      <h2>1. What We Collect</h2>
+      <ul>
+        <li><strong>Account Information:</strong> Email address, name, and profile data when you sign up or log in.</li>
+        <li><strong>Health & Fitness Data:</strong> Your fitness goals, dietary preferences, restrictions, and activity level to personalize meal plans.</li>
+        <li><strong>Location Data:</strong> Only if you grant permission in the app, to help with local restaurant recommendations.</li>
+        <li><strong>Technical Data:</strong> Device identifiers, app version, crash logs, and usage analytics to maintain reliability.</li>
+      </ul>
+    </div>
+
+    <div class="policy-section">
+      <h2>2. How We Use Your Data</h2>
+      <ul>
+        <li>Create personalized meal plans tailored to your goals and preferences</li>
+        <li>Generate recipes and grocery lists based on your dietary needs</li>
+        <li>Send you updates, notifications, and recommendations</li>
+        <li>Improve our app features and user experience</li>
+        <li>Comply with legal requirements and protect against fraud</li>
+      </ul>
+    </div>
+
+    <div class="policy-section">
+      <h2>3. Data Sharing</h2>
+      <ul>
+        <li>We never sell your personal data to third parties.</li>
+        <li>We only share data with trusted service providers (cloud hosting, analytics) under strict confidentiality agreements.</li>
+        <li>We may disclose data if required by law or to protect our users and platform.</li>
+      </ul>
+    </div>
+
+    <div class="policy-section">
+      <h2>4. Data Security</h2>
+      <p>We use industry-standard encryption, secure servers, and access controls to protect your data. All connections use HTTPS encryption, and we maintain regular backups and security audits.</p>
+    </div>
+
+    <div class="policy-section">
+      <h2>5. Your Rights</h2>
+      <ul>
+        <li>You can update your profile and preferences anytime in the app</li>
+        <li>You can request a copy of your data by contacting support</li>
+        <li>You can delete your account and data at any time</li>
+        <li>You can manage notification preferences in the app settings</li>
+        <li>You can revoke location permissions through your device settings</li>
+      </ul>
+    </div>
+
+    <div class="policy-section">
+      <h2>6. Data Retention</h2>
+      <p>We retain your data as long as your account is active. When you delete your account, we remove your personal data within 30 days, except where we're required to retain it by law.</p>
+    </div>
+
+    <div class="policy-section">
+      <h2>7. Platform Compliance</h2>
+      <ul>
+        <li>For iOS: We comply with Apple App Store Review Guidelines including user privacy and transparent data practices</li>
+        <li>For Android: We comply with Google Play Developer Program Policies</li>
+        <li>We do not knowingly collect data from children under 13</li>
+      </ul>
+    </div>
+
+    <div class="policy-section">
+      <h2>8. Changes to This Policy</h2>
+      <p>We may update this privacy policy from time to time. We'll notify you of material changes through the app or email. Your continued use of Vitore means you accept any updates to this policy.</p>
+    </div>
+
+    <div class="policy-section">
+      <h2>9. Contact Us</h2>
+      <p>If you have questions about our privacy practices, please contact us at <a href="mailto:support@vitore.org">support@vitore.org</a></p>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Vitore. All rights reserved.</p>
+    <p><a href="index.html">Home</a> • <a href="blog.html">Blog</a> • <a href="privacy.html">Privacy</a></p>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+
+    function loadTheme() {
+      const saved = localStorage.getItem('vitore-theme');
+      if (saved) {
+        body.className = saved;
+        updateToggle(saved === 'dark');
+      }
+    }
+
+    function updateToggle(isDark) {
+      const circle = themeToggle.querySelector('.toggle-circle');
+      circle.textContent = isDark ? '🌙' : '☀️';
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const isDark = body.classList.contains('dark');
+      body.className = isDark ? 'light' : 'dark';
+      localStorage.setItem('vitore-theme', isDark ? 'light' : 'dark');
+      updateToggle(!isDark);
+    });
+
+    loadTheme();
+  </script>
+</body>
+</html>

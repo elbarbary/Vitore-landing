@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ramadan Meal Planning | Vitore Blog</title>
+  <meta name="description" content="Complete Ramadan nutrition guide with balanced suhoor and iftar meals. Learn how to maintain energy and stay healthy during Ramadan.">
+  <style>
+    * {margin: 0; padding: 0; box-sizing: border-box;}
+    html {scroll-behavior: smooth;}
+    body {font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.7;}
+    :root {--primary: #10b981; --secondary: #06b6d4;}
+    body.dark {background: #0a0a0a; color: white;}
+    body.light {background: #fafbfc; color: #111;}
+    header {position: fixed; top: 0; left: 0; right: 0; z-index: 50;}
+    .header-container {margin: 0.5rem; max-width: 1280px; margin-left: auto; margin-right: auto;}
+    .header-bar {backdrop-filter: blur(32px); border: 1px solid rgba(255,255,255,0.6); border-radius: 1rem; padding: 0.75rem 1.5rem; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 20px rgba(0,0,0,0.1);}
+    body.dark .header-bar {background: rgba(0,0,0,0.6); border-color: rgba(255,255,255,0.1);}
+    body.light .header-bar {background: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.6);}
+    .logo {display: flex; align-items: center; gap: 0.5rem; text-decoration: none; color: inherit; font-weight: 700;}
+    .logo-image {font-size: 24px;}
+    nav {display: flex; gap: 1rem; align-items: center;}
+    .nav-link {text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; transition: all 0.2s;}
+    body.light .nav-link {color: #4b5563;}
+    body.light .nav-link:hover {background: rgba(229, 231, 235, 0.8);}
+    body.dark .nav-link {color: #9ca3af;}
+    body.dark .nav-link:hover {background: rgba(255, 255, 255, 0.1);}
+    .theme-toggle {width: 50px; height: 28px; border-radius: 9999px; border: none; cursor: pointer; display: flex; align-items: center; padding: 3px; transition: all 0.5s;}
+    body.light .theme-toggle {background: linear-gradient(to right, #fcd34d, #fed7aa);}
+    body.dark .theme-toggle {background: #3f3f46;}
+    .toggle-circle {width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.5s; font-size: 12px;}
+    body.light .toggle-circle {background: white; transform: translateX(0);}
+    body.dark .toggle-circle {background: #1f2937; transform: translateX(22px);}
+    main {margin-top: 100px; padding: 3rem 1.5rem; max-width: 48rem; margin-left: auto; margin-right: auto;}
+    .article-header {margin-bottom: 2rem;}
+    .article-meta {display: flex; gap: 1rem; margin-bottom: 1rem; font-size: 0.875rem; flex-wrap: wrap;}
+    .article-date {opacity: 0.7;}
+    .article-category {background: var(--primary); color: white; padding: 0.25rem 0.75rem; border-radius: 9999px; font-weight: 600;}
+    .article-header h1 {font-size: 2rem; font-weight: 900; margin-bottom: 1rem; line-height: 1.2;}
+    .article-description {font-size: 1.1rem; opacity: 0.9;}
+    .article-content {margin-top: 2rem;}
+    .article-content h2 {font-size: 1.5rem; font-weight: 700; margin: 2rem 0 1rem;}
+    .article-content h3 {font-size: 1.25rem; font-weight: 600; margin: 1.5rem 0 0.75rem;}
+    .article-content p {margin-bottom: 1rem; text-align: justify;}
+    .article-content ul, .article-content ol {margin-left: 2rem; margin-bottom: 1rem;}
+    .article-content li {margin-bottom: 0.5rem;}
+    .back-link {display: inline-flex; align-items: center; gap: 0.5rem; color: var(--primary); text-decoration: none; margin-bottom: 2rem; font-weight: 600;}
+    .back-link:hover {opacity: 0.8;}
+    footer {padding: 2rem 1.5rem; text-align: center; border-top: 1px solid; margin-top: 3rem;}
+    body.dark footer {border-color: rgba(255,255,255,0.1); color: #9ca3af;}
+    body.light footer {border-color: #e5e7eb; color: #4b5563;}
+    footer a {color: inherit; text-decoration: none;}
+    footer a:hover {text-decoration: underline;}
+  </style>
+</head>
+<body class="light">
+  <header>
+    <div class="header-container">
+      <div class="header-bar">
+        <a href="../../index.html" class="logo">
+          <span class="logo-image">🌱</span>
+          <span>Vitore</span>
+        </a>
+        <nav>
+          <a href="../../index.html" class="nav-link">Home</a>
+          <a href="../blog.html" class="nav-link">Blog</a>
+          <a href="../../privacy.html" class="nav-link">Privacy</a>
+          <button class="theme-toggle" id="themeToggle">
+            <div class="toggle-circle">☀️</div>
+          </button>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <a href="../blog.html" class="back-link">← Back to Blog</a>
+
+    <article>
+      <header class="article-header">
+        <div class="article-meta">
+          <span class="article-date">February 2, 2026</span>
+          <span class="article-category">Lifestyle</span>
+        </div>
+        <h1>Ramadan Meal Planning: Healthy Suhoor & Iftar Recipes for Optimal Energy</h1>
+        <p class="article-description">Complete Ramadan nutrition guide with balanced suhoor and iftar meals. Learn how to maintain energy, stay hydrated, and avoid common fasting mistakes during the holy month.</p>
+      </header>
+
+      <div class="article-content">
+        <h2>Ramadan Nutrition: Science-Backed Strategies</h2>
+        <p>Ramadan fasting is a form of intermittent fasting that, when done correctly, can provide numerous health benefits. With proper planning, you can maintain energy, preserve muscle mass, and even improve your metabolic health.</p>
+
+        <h2>The Science of Fasting</h2>
+        <p>During Ramadan fasting (typically 14-16 hours), your body goes through several phases:</p>
+        <ol>
+          <li><strong>Hours 0-4:</strong> Digesting last meal</li>
+          <li><strong>Hours 4-8:</strong> Blood sugar normalizes, fat burning begins</li>
+          <li><strong>Hours 8-12:</strong> Growth hormone increases, cellular repair starts</li>
+          <li><strong>Hours 12-16:</strong> Deep ketosis, autophagy peaks</li>
+        </ol>
+
+        <h2>The Perfect Suhoor (السحور المثالي)</h2>
+
+        <h3>Goals for Suhoor:</h3>
+        <ul>
+          <li>Sustained energy throughout the day</li>
+          <li>Slow-releasing carbohydrates</li>
+          <li>Adequate protein to preserve muscle</li>
+          <li>Hydration</li>
+        </ul>
+
+        <h3>Suhoor Recipe 1: Power Oatmeal Bowl</h3>
+        <ul>
+          <li>1 cup rolled oats</li>
+          <li>1 cup milk (or almond milk)</li>
+          <li>1 tbsp chia seeds</li>
+          <li>1 banana, sliced</li>
+          <li>Handful of walnuts</li>
+          <li>Drizzle of honey</li>
+          <li>Pinch of cinnamon</li>
+        </ul>
+        <p><strong>Benefits:</strong> Slow-releasing carbs, healthy fats, 15g protein</p>
+
+        <h3>Suhoor Recipe 2: Egyptian Ful Power Bowl</h3>
+        <ul>
+          <li>1 cup ful medames</li>
+          <li>2 boiled eggs</li>
+          <li>Cherry tomatoes, cucumber</li>
+          <li>Olive oil drizzle</li>
+          <li>1/2 whole grain baladi bread</li>
+          <li>Fresh lemon juice</li>
+        </ul>
+        <p><strong>Benefits:</strong> 25g protein, high fiber, sustained energy</p>
+
+        <h3>Suhoor Recipe 3: Herbal Digest Bowl</h3>
+        <ul>
+          <li>Thick yogurt (1.5 cups)</li>
+          <li>Whole grain granola</li>
+          <li>Berries (fresh or dried)</li>
+          <li>1 tbsp honey</li>
+          <li>1 tbsp ground flaxseed</li>
+          <li>Herbal tea (mint or ginger)</li>
+        </ul>
+        <p><strong>Benefits:</strong> Probiotics, fiber, slow digestion</p>
+
+        <h2>Iftar: Breaking the Fast</h2>
+
+        <h3>Do This:</h3>
+        <ul>
+          <li>Start with dates (energy + minerals)</li>
+          <li>Have a small glass of water or unsweetened juice</li>
+          <li>Wait 15-20 minutes before main meal</li>
+          <li>Eat slowly to aid digestion</li>
+          <li>Include vegetables, protein, and moderate carbs</li>
+        </ul>
+
+        <h3>Avoid This:</h3>
+        <ul>
+          <li>Eating too fast (causes bloating)</li>
+          <li>Heavy fried foods immediately</li>
+          <li>Sugary drinks and pastries</li>
+          <li>Overeating after fasting</li>
+        </ul>
+
+        <h3>Iftar Recipe 1: Lentil & Vegetable Soup</h3>
+        <ul>
+          <li>2 cups lentils, cooked</li>
+          <li>4 cups vegetable broth</li>
+          <li>Onion, garlic, carrots, celery</li>
+          <li>Spices: cumin, turmeric, coriander</li>
+          <li>Olive oil + lemon juice</li>
+        </ul>
+        <p><strong>Perfect for:</strong> Starting your iftar, easy digestion</p>
+
+        <h3>Iftar Recipe 2: Grilled Fish & Vegetables</h3>
+        <ul>
+          <li>Grilled white fish (200g)</li>
+          <li>Steamed broccoli, carrots, zucchini</li>
+          <li>Brown rice (1/2 cup)</li>
+          <li>Lemon-tahini sauce</li>
+          <li>Fresh salad</li>
+        </ul>
+        <p><strong>Macros:</strong> Excellent protein, balanced nutrients</p>
+
+        <h3>Iftar Recipe 3: Molokhia with Chicken</h3>
+        <ul>
+          <li>Fresh molokhia (1 bunch)</li>
+          <li>Chicken breast (grilled, 150g)</li>
+          <li>Garlic and coriander</li>
+          <li>Olive oil</li>
+          <li>Served with rice or bread</li>
+        </ul>
+        <p><strong>Why:</strong> Traditional, nutrient-dense, easy to digest</p>
+
+        <h2>Hydration Strategy</h2>
+        <p>You lose fluids during the fast. To rehydrate properly:</p>
+        <ul>
+          <li><strong>At Iftar:</strong> Start with water or warm herbal tea</li>
+          <li><strong>After Main Meal:</strong> Sip water throughout evening</li>
+          <li><strong>Before Suhoor:</strong> Drink 1-2 glasses of water</li>
+          <li><strong>Avoid:</strong> Caffeine and salty foods (increase thirst)</li>
+          <li><strong>Fruits:</strong> Watermelon, banana, orange are hydrating</li>
+        </ul>
+
+        <h2>Common Ramadan Mistakes to Avoid</h2>
+        <ul>
+          <li><strong>Skipping suhoor:</strong> You'll feel exhausted all day</li>
+          <li><strong>Eating too much:</strong> Overeating causes weight gain, not loss</li>
+          <li><strong>Too many sweets:</strong> Ramadan desserts are tasty but calorie bombs</li>
+          <li><strong>Not drinking enough water:</strong> Dehydration causes headaches</li>
+          <li><strong>Sleeping too much:</strong> Light exercise helps, not harmful</li>
+        </ul>
+
+        <h2>Sample Ramadan Day Schedule</h2>
+
+        <h3>6:00 AM - Suhoor</h3>
+        <p>Ful power bowl (see recipe above)</p>
+        <p>Drink 2 glasses of water + herbal tea</p>
+
+        <h3>6:30 AM - 6:30 PM - FAST</h3>
+        <p>Light activities, prayer, rest as needed</p>
+        <p>Drink water if possible (some prefer to avoid)</p>
+
+        <h3>6:30 PM - Iftar (Breaking Fast)</h3>
+        <p>3-5 dates + Glass of water</p>
+        <p>Wait 15-20 minutes</p>
+
+        <h3>6:45 PM - Main Iftar Meal</h3>
+        <p>Lentil soup + Grilled fish with vegetables + Salad</p>
+        <p>Small portion of dates or light dessert</p>
+
+        <h3>8:00 PM - Evening Tea & Light Snack</h3>
+        <p>Herbal tea + Handful of almonds</p>
+
+        <h3>8:30 PM - Prayer & Social Time</h3>
+
+        <h3>10:00 PM - Light Second Meal (Optional)</h3>
+        <p>If hungry: Grilled chicken + Brown rice + Vegetables</p>
+
+        <h2>Key Benefits of Healthy Ramadan Fasting</h2>
+        <ul>
+          <li>Autophagy (cellular repair mechanism)</li>
+          <li>Improved insulin sensitivity</li>
+          <li>Metabolic flexibility</li>
+          <li>Mental clarity & focus</li>
+          <li>Spiritual benefits plus health benefits</li>
+        </ul>
+
+        <p style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.7; font-style: italic;">
+          Ramadan is a beautiful month for reflection and health. This guide helps you fast more healthfully. Consult a doctor if you have health conditions.
+        </p>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Vitore. All rights reserved.</p>
+    <p><a href="../../index.html">Home</a> • <a href="../blog.html">Blog</a> • <a href="../../privacy.html">Privacy</a></p>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    function loadTheme() {
+      const saved = localStorage.getItem('vitore-theme');
+      if (saved) {
+        body.className = saved;
+        updateToggle(saved === 'dark');
+      }
+    }
+    function updateToggle(isDark) {
+      const circle = themeToggle.querySelector('.toggle-circle');
+      circle.textContent = isDark ? '🌙' : '☀️';
+    }
+    themeToggle.addEventListener('click', () => {
+      const isDark = body.classList.contains('dark');
+      body.className = isDark ? 'light' : 'dark';
+      localStorage.setItem('vitore-theme', isDark ? 'light' : 'dark');
+      updateToggle(!isDark);
+    });
+    loadTheme();
+  </script>
+</body>
+</html>
