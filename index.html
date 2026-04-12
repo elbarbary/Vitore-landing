@@ -10,7 +10,8 @@
   <meta property="og:description" content="AI-powered meal planner for personalized nutrition. Available on iOS & Android.">
   <meta property="og:image" content="https://vitore.org/og-image.jpg">
   <meta name="theme-color" content="#10b981">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%2310b981'>🌱</text></svg>">
+  <link rel="icon" type="image/png" href="./icon.png">
+  <link rel="apple-touch-icon" href="./icon.png">
   <style>
     * {
       margin: 0;
@@ -169,7 +170,7 @@
     .floating-emoji {
       position: absolute;
       font-size: 3rem;
-      drop-shadow(0 4px 12px rgba(0,0,0,0.1));
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.1));
       opacity: 0.5;
       animation: float-emoji var(--duration, 6s) ease-in-out infinite;
       animation-delay: var(--delay, 0s);
@@ -264,14 +265,16 @@
     .logo-image {
       width: 40px;
       height: 40px;
-      border-radius: 0.5rem;
+      border-radius: 0.65rem;
+      object-fit: cover;
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.25);
       background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      color: white;
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+      transition: transform 0.25s ease;
+    }
+
+    .logo:hover .logo-image {
+      transform: scale(1.06);
     }
 
     .beta-badge {
@@ -869,6 +872,17 @@
     .problem-card.large {
       background: linear-gradient(135deg, #dc2626 0%, #ea580c 100%);
       color: white;
+      border: 2px solid rgba(255, 255, 255, 0.42);
+      box-shadow: 0 18px 40px rgba(220, 38, 38, 0.35);
+    }
+
+    .problem-card.large::after {
+      content: '';
+      position: absolute;
+      inset: 6px;
+      border-radius: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      pointer-events: none;
     }
 
     .problem-card.large .tilt-card-inner {
@@ -896,12 +910,43 @@
       font-size: 3.5rem;
       font-weight: 900;
       margin-bottom: 0.5rem;
+      color: #ffffff;
+      -webkit-text-stroke: 1.5px rgba(0, 0, 0, 0.28);
+      text-shadow: 0 8px 26px rgba(0, 0, 0, 0.28);
+      letter-spacing: 0.02em;
     }
 
     .large-text {
       font-size: 1.125rem;
-      font-weight: 500;
+      font-weight: 600;
       text-align: center;
+      color: rgba(255, 255, 255, 0.95);
+      line-height: 1.35;
+    }
+
+    .large-subtext {
+      margin-top: 0.5rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .stats-source {
+      margin-top: 1rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      opacity: 0.75;
+      color: #6b7280;
+    }
+
+    body.dark .stats-source.live {
+      color: #6ee7b7;
+    }
+
+    body.light .stats-source.live {
+      color: #059669;
     }
 
     /* Features Section */
@@ -1402,7 +1447,7 @@
       <div class="header-bar">
         <div class="header-left">
           <a href="/" class="logo">
-            <div class="logo-image">🌱</div>
+            <img src="./icon.png" alt="Vitore" class="logo-image">
             <span>Vitore</span>
           </a>
           <div class="beta-badge">
@@ -1411,8 +1456,8 @@
           </div>
         </div>
         <nav>
-          <a href="/blog" class="nav-link">📚 Blog</a>
-          <a href="/privacy-policy" class="nav-link">Privacy</a>
+          <a href="./blog.html" class="nav-link">📚 Blog</a>
+          <a href="./privacy.html" class="nav-link">Privacy</a>
           <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
             <div class="toggle-circle" id="toggleCircle">🌙</div>
           </button>
@@ -1479,6 +1524,7 @@
           <div class="stat-label">Plans Generated</div>
         </div>
       </div>
+      <div id="statsSource" class="stats-source">Estimated totals shown</div>
     </div>
   </section>
 
@@ -1504,6 +1550,7 @@
           <div class="tilt-card-inner">
             <div class="large-number">95%</div>
             <div class="large-text">of diets fail within the first year</div>
+            <div class="large-subtext">Global adherence studies</div>
           </div>
         </div>
 
@@ -1648,7 +1695,7 @@
       </div>
 
       <div class="blog-grid">
-        <a href="/blog/diabetes-friendly-eating-egypt.html" class="blog-card">
+        <a href="./blog/diabetes-friendly-eating-egypt.html" class="blog-card">
           <div class="blog-card-content">
             <div class="blog-category blog-category-nutrition">NUTRITION</div>
             <h3 class="blog-title">Diabetes-Friendly Eating in Egypt</h3>
@@ -1661,7 +1708,7 @@
           </div>
         </a>
 
-        <a href="/blog/healthy-koshari-recipe-weight-loss.html" class="blog-card">
+        <a href="./blog/healthy-koshari-recipe-weight-loss.html" class="blog-card">
           <div class="blog-card-content">
             <div class="blog-category blog-category-recipes">RECIPES</div>
             <h3 class="blog-title">Healthy Koshari for Weight Loss</h3>
@@ -1674,7 +1721,7 @@
           </div>
         </a>
 
-        <a href="/blog/gym-nutrition-guide-egypt.html" class="blog-card">
+        <a href="./blog/gym-nutrition-guide-egypt.html" class="blog-card">
           <div class="blog-card-content">
             <div class="blog-category blog-category-wellness">WELLNESS</div>
             <h3 class="blog-title">Gym Nutrition Guide for Egypt</h3>
@@ -1710,8 +1757,8 @@
     <div class="footer-content">
       <p class="footer-text">
         © 2024 Vitore. • 
-        <a href="/privacy-policy" class="footer-link">Privacy Policy</a> • 
-        <a href="/blog" class="footer-link">Blog</a>
+        <a href="./privacy.html" class="footer-link">Privacy Policy</a> • 
+        <a href="./blog.html" class="footer-link">Blog</a>
       </p>
     </div>
   </footer>
@@ -1751,6 +1798,24 @@
       });
     }
 
+    const DEFAULT_STATS = {
+      users: 5000,
+      meals: 50000,
+      plans: 15000,
+    };
+
+    const LIVE_STATS_ENDPOINTS = [
+      'https://us-central1-vfoods-aa345.cloudfunctions.net/publicStats',
+      'https://us-central1-vfoods-aa345.cloudfunctions.net/getPublicStats',
+    ];
+
+    const LOCAL_STATS_FILE = './stats.json';
+
+    function parseNumber(value, fallback = 0) {
+      const n = Number(value);
+      return Number.isFinite(n) && n >= 0 ? Math.floor(n) : fallback;
+    }
+
     // Animated counter
     function animateCounter(elementId, targetValue, duration = 2000) {
       const element = document.getElementById(elementId);
@@ -1779,6 +1844,76 @@
       }, { threshold: 0.5 });
 
       observer.observe(element);
+    }
+
+    async function fetchLiveStats() {
+      const statsSource = document.getElementById('statsSource');
+
+      try {
+        const localRes = await fetch(`${LOCAL_STATS_FILE}?v=${Date.now()}`, {
+          headers: { 'Accept': 'application/json' },
+        });
+
+        if (localRes.ok) {
+          const localData = await localRes.json();
+          const users = parseNumber(localData.activeUsers ?? localData.totalUsers ?? localData.users, DEFAULT_STATS.users);
+          const meals = parseNumber(localData.totalMealsGenerated ?? localData.totalMeals ?? localData.meals, DEFAULT_STATS.meals);
+          const plans = parseNumber(localData.totalPlansGenerated ?? localData.totalPlans ?? localData.plans, DEFAULT_STATS.plans);
+
+          animateCounter('stat-users', users);
+          animateCounter('stat-meals', meals);
+          animateCounter('stat-plans', plans);
+
+          if (statsSource) {
+            statsSource.textContent = 'Live totals synced via GitHub Actions';
+            statsSource.classList.add('live');
+          }
+          return;
+        }
+      } catch (_) {
+        // Fall back to direct Firebase endpoint
+      }
+
+      for (const endpoint of LIVE_STATS_ENDPOINTS) {
+        try {
+          const controller = new AbortController();
+          const timer = setTimeout(() => controller.abort(), 5000);
+          const response = await fetch(endpoint, {
+            signal: controller.signal,
+            headers: { 'Accept': 'application/json' },
+          });
+          clearTimeout(timer);
+
+          if (!response.ok) {
+            continue;
+          }
+
+          const data = await response.json();
+          const users = parseNumber(data.activeUsers ?? data.totalUsers ?? data.users, DEFAULT_STATS.users);
+          const meals = parseNumber(data.totalMealsGenerated ?? data.totalMeals ?? data.meals, DEFAULT_STATS.meals);
+          const plans = parseNumber(data.totalPlansGenerated ?? data.totalPlans ?? data.plans, DEFAULT_STATS.plans);
+
+          animateCounter('stat-users', users);
+          animateCounter('stat-meals', meals);
+          animateCounter('stat-plans', plans);
+
+          if (statsSource) {
+            statsSource.textContent = 'Live totals from Firebase';
+            statsSource.classList.add('live');
+          }
+          return;
+        } catch (_) {
+          // Try the next endpoint
+        }
+      }
+
+      animateCounter('stat-users', DEFAULT_STATS.users);
+      animateCounter('stat-meals', DEFAULT_STATS.meals);
+      animateCounter('stat-plans', DEFAULT_STATS.plans);
+      if (statsSource) {
+        statsSource.textContent = 'Estimated totals shown';
+        statsSource.classList.remove('live');
+      }
     }
 
     // Theme toggle
@@ -1867,9 +2002,7 @@
       initThemeToggle();
       initMeshGradient();
       init3DTilt();
-      animateCounter('stat-users', 5000);
-      animateCounter('stat-meals', 50000);
-      animateCounter('stat-plans', 15000);
+      fetchLiveStats();
     });
 
     // Re-initialize on window resize
