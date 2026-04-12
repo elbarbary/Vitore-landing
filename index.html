@@ -1803,9 +1803,9 @@
     }
 
     const DEFAULT_STATS = {
-      users: 5000,
-      meals: 50000,
-      plans: 15000,
+      users: 0,
+      meals: 0,
+      plans: 0,
     };
 
     const LIVE_STATS_ENDPOINTS = [
@@ -1853,31 +1853,6 @@
     async function fetchLiveStats() {
       const statsSource = document.getElementById('statsSource');
 
-      try {
-        const localRes = await fetch(`${LOCAL_STATS_FILE}?v=${Date.now()}`, {
-          headers: { 'Accept': 'application/json' },
-        });
-
-        if (localRes.ok) {
-          const localData = await localRes.json();
-          const users = parseNumber(localData.activeUsers ?? localData.totalUsers ?? localData.users, DEFAULT_STATS.users);
-          const meals = parseNumber(localData.totalMealsGenerated ?? localData.totalMeals ?? localData.meals, DEFAULT_STATS.meals);
-          const plans = parseNumber(localData.totalPlansGenerated ?? localData.totalPlans ?? localData.plans, DEFAULT_STATS.plans);
-
-          animateCounter('stat-users', users);
-          animateCounter('stat-meals', meals);
-          animateCounter('stat-plans', plans);
-
-          if (statsSource) {
-            statsSource.textContent = 'Live totals synced via GitHub Actions';
-            statsSource.classList.add('live');
-          }
-          return;
-        }
-      } catch (_) {
-        // Fall back to direct Firebase endpoint
-      }
-
       for (const endpoint of LIVE_STATS_ENDPOINTS) {
         try {
           const controller = new AbortController();
@@ -1911,11 +1886,40 @@
         }
       }
 
+      try {
+        const localRes = await fetch(`${LOCAL_STATS_FILE}?v=${Date.now()}`, {
+          headers: { 'Accept': 'application/json' },
+        });
+
+        if (localRes.ok) {
+          const localData = await localRes.json();
+          const isPlaceholder = localData.source === 'static-fallback' || !localData.updatedAt;
+
+          if (!isPlaceholder) {
+            const users = parseNumber(localData.activeUsers ?? localData.totalUsers ?? localData.users, DEFAULT_STATS.users);
+            const meals = parseNumber(localData.totalMealsGenerated ?? localData.totalMeals ?? localData.meals, DEFAULT_STATS.meals);
+            const plans = parseNumber(localData.totalPlansGenerated ?? localData.totalPlans ?? localData.plans, DEFAULT_STATS.plans);
+
+            animateCounter('stat-users', users);
+            animateCounter('stat-meals', meals);
+            animateCounter('stat-plans', plans);
+
+            if (statsSource) {
+              statsSource.textContent = 'Cached live totals';
+              statsSource.classList.add('live');
+            }
+            return;
+          }
+        }
+      } catch (_) {
+        // Fall through to neutral defaults
+      }
+
       animateCounter('stat-users', DEFAULT_STATS.users);
       animateCounter('stat-meals', DEFAULT_STATS.meals);
       animateCounter('stat-plans', DEFAULT_STATS.plans);
       if (statsSource) {
-        statsSource.textContent = 'Estimated totals shown';
+        statsSource.textContent = 'Live stats unavailable right now';
         statsSource.classList.remove('live');
       }
     }
